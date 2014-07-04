@@ -1,0 +1,71 @@
+.clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+#orWrapper {
+	@extend .clearfix;
+	margin: 26px 0;
+
+	.line {
+		width: 100%;
+		height: 1px;
+		background: #ADADAD;
+		margin-top: 16px;
+	}
+
+	#leftColumn {
+		float: left;
+		width: 47%;
+	}
+
+	#centerColumn {
+		float: left;
+		width: 6%;
+
+		#or {
+			font-size: 28px;
+			text-align: center;
+		}
+	}
+
+	#rightColumn {
+		float: right;
+		width: 47%;
+	}
+}
+
+form#ocr {
+	#info {
+		margin-bottom: 8px;
+	}
+
+	#inputWrapper {
+		@extend .clearfix;
+		width: 75%;
+		margin: 0 auto;
+
+		input[type=file] {
+			float: left;
+			border: none;
+			margin: 11px 0;
+			padding: 0;
+		}
+
+		input[type=submit] {
+			float: right;
+			width: 50%;
+			font-size: 20px;
+			font-weight: 700;
+			background: #ECECEC;
+			cursor: pointer;
+
+			&:hover {
+				background: #E7E7E7;
+			}
+		}
+	}
+}
