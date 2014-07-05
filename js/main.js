@@ -20,6 +20,9 @@ $(document).ready(function() {
 	$('form#ocr').submit(function(e) {
 		e.preventDefault();
 
+		$('#uploadBtn').val('Uploading...');
+		$('#uploadBtn').attr('disabled', 'disabled');
+
 		var formData = new FormData($('form#ocr')[0]);
 
 		$.ajax ({
@@ -44,7 +47,9 @@ $(document).ready(function() {
 
 	var url;
 	$('#cropImage').click(function() {
-		console.log(url);
+		console.log('here');
+		$('#cropImage').html('Cropping...');
+		$('#cropImage').attr('disabled', 'disabled');
 		$.post('/php/crop.php', { image: url, coords: coords }, function(data) {
 			window.location = "/p/" + data;
 		});
@@ -52,13 +57,23 @@ $(document).ready(function() {
 
 	function uploaded(data) {
 		url = data;
+		$('#uploadBtn').val('Uploaded');
+		$('#uploadBtn').removeAttr('disabled');
 		$('#wordsearchImage').attr('src', '/images/' + data);
-		$('#wordsearchImage').Jcrop({
-			onChange: showCoords
+		$('#wordsearchImage').load(function() {
+			$('#wordsearchImage').Jcrop({
+				onChange: showCoords,
+				setSelect: [ 20, 20, $('#wordsearchImage').width() - 20, $('#wordsearchImage').height() - 20 ]
+			});
 		});
+
+		$('#image').slideDown();
+		$('#cropImage').select();
 	}
 
 	function uploadError() {
+		$('#uploadBtn').val('Upload');
+		$('#uploadBtn').removeAttr('disabled');
 		alert("An error occurred.");
 	}
 

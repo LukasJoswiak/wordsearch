@@ -7,7 +7,7 @@
 		$image = htmlspecialchars(strip_tags($_POST['image']), ENT_QUOTES, 'UTF-8');
 		$coords = $_POST['coords'];
 
-		$extension = pathinfo($image, PATHINFO_EXTENSION);
+		$extension = strtolower(pathinfo($image, PATHINFO_EXTENSION));
 
 		$src = $path . '/images/' . $image;
 		$cropped = $path . '/images/cropped/' . $image;
@@ -48,16 +48,17 @@
 				imagejpeg($dest, $cropped);
 		}
 
-		//$tesseract = new TesseractOCR($_FILES['file']['tmp_name']);
-		//$tesseract->setWhitelist(range('A', 'Z'));
+		$tesseract = new TesseractOCR($cropped);
+		$tesseract->setWhitelist(range('A', 'Z'));
 
-		// $lines = explode("\n", strtoupper($tesseract->recognize()));
+		$lines = explode("\n", strtoupper($tesseract->recognize()));
+		// $length = strlen(str_replace(' ', '', $lines[0]));
 
-		$lines = array();
-
-		$wordsearch = array('');
+		$wordsearch = array();
 		foreach($lines as $key => $line) {
-			$wordsearch[$key] = explode(" ", $lines[$key]);
+			// $wordsearch[$key] = explode(" ", $lines[$key]);
+			$lines[$key] = str_replace(' ', '', $lines[$key]);
+			$wordsearch[$key] = str_split($lines[$key]/*, $length*/);
 		}
 
 		$type = 1;
@@ -68,7 +69,7 @@
 
 		$wordsearch = json_encode($wordsearch);
 
-		if($general->new_puzzle($width, $height, $url, $update, $type) && $general->update_puzzle($wordsearch, $url)) {
+		if($general->new_puzzle($width, $height, $url, $update, $type, $image) && $general->update_puzzle($wordsearch, $url)) {
 			echo $url;
 		}
 	}

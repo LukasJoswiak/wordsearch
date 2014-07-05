@@ -13,7 +13,7 @@
 
 		$url = substr(uniqid('', true), -5);
 
-		if($general->new_puzzle($width, $height, $url, $update, $type)) {
+		if($general->new_puzzle($width, $height, $url, $update, $type, null)) {
 			echo $url;
 		}
 	}

@@ -1,10 +1,3 @@
-<?php
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	require_once($path . '/php/tesseract/TesseractOCR/TesseractOCR.php');
-
-	$tesseract = new TesseractOCR('pic3.png');
-	echo $tesseract->recognize();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,13 +61,13 @@
 
 			<div id="inputWrapper">
 				<input type="file" name="file" id="file" />
-				<input type="submit" value="Upload" />
+				<input type="submit" value="Upload" id="uploadBtn" />
 			</div>
 		</form>
 
 		<div id="image">
 			<p>
-				Drag your cursor over the image to select only the wordsearch puzzle. Whitespace around the outside of the puzzle is helpful.
+				Drag the handles to select the wordsearch puzzla area. Whitespace around the outside of the puzzle is helpful.
 			</p>
 
 			<img src="" alt="image" id="wordsearchImage" />

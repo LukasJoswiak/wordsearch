@@ -4,7 +4,7 @@
 	$allowed = array('jpg', 'jpeg', 'pjpeg', 'png', 'gif');
 
 	if(isset($_FILES)) {
-		$extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+		$extension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
 		$size = $_FILES['file']['size'];
 
 		if($size < 2000000 && in_array($extension, $allowed)) {

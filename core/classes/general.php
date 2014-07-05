@@ -6,19 +6,19 @@
 			$this->db = $database;
 		}
 
-		public function new_puzzle($width, $height, $url, $update, $type) {
+		public function new_puzzle($width, $height, $url, $update, $type, $image) {
 			$datetime = date("Y-m-d H:i:s");
 			if($update !== false) {
 				$query = "UPDATE puzzles SET `width` = :width, `height` = :height, `type` = :type, `datetime` = :datetime WHERE `url` = :url";
 				$url = $update;
 			} else {
-				$query = "INSERT INTO puzzles (`width`, `height`, `url`, `type`, `datetime`) VALUES (:width, :height, :url, :type, :datetime)";
+				$query = "INSERT INTO puzzles (`width`, `height`, `url`, `type`, `image`, `datetime`) VALUES (:width, :height, :url, :type, :image, :datetime)";
 			}
 
 			$stmt = $this->db->prepare($query);
 
 			try {
-				$stmt->execute(array(':width' => $width, ':height' => $height, ':url' => $url, ':type' => $type, ':datetime' => $datetime));
+				$stmt->execute(array(':width' => $width, ':height' => $height, ':url' => $url, ':type' => $type, ':image' => $image, ':datetime' => $datetime));
 
 				return true;
 			} catch(PDOException $e) {
