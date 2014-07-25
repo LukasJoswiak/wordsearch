@@ -18,7 +18,11 @@
 			$stmt = $this->db->prepare($query);
 
 			try {
-				$stmt->execute(array(':width' => $width, ':height' => $height, ':url' => $url, ':type' => $type, ':image' => $image, ':datetime' => $datetime));
+				if($update !== false) {
+					$stmt->execute(array(':width' => $width, ':height' => $height, ':url' => $url, ':type' => $type, ':datetime' => $datetime));
+				} else {
+					$stmt->execute(array(':width' => $width, ':height' => $height, ':url' => $url, ':type' => $type, ':image' => $image, ':datetime' => $datetime));
+				}
 
 				return true;
 			} catch(PDOException $e) {

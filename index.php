@@ -75,5 +75,13 @@
 			<button id="cropImage">Crop</button>
 		</div>
 	</main>
+
+	<footer>
+		<ul>
+			<li>
+				<a href="https://lukasjoswiak.com">Lukas Joswiak</a> &#8212; <a href="mailto:lukas@lukasjoswiak.com">lukas@lukasjoswiak.com</a>
+			</li>
+		</ul>
+	</footer>
 </body>
 </html>
