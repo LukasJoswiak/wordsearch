@@ -152,12 +152,16 @@ main {
 	form#ocr {
 		#info {
 			margin-bottom: 8px;
+
+			p {
+				margin: 10px 0;
+			}
 		}
 
 		#inputWrapper {
 			@extend .clearfix;
 			width: 75%;
-			margin: 0 auto;
+			margin: 20px auto;
 
 			input[type=file] {
 				float: left;

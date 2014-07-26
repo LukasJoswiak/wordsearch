@@ -54,12 +54,28 @@
 
 		<form action="/php/upload.php" method="POST" enctype="multipart/form-data" id="ocr">
 			<div id="info">
-				Take and upload a picture of the wordsearch and we will attempt to recognize the characters and input them for you.
+				<p>
+					Take and upload a picture of the wordsearch and we will attempt to recognize the characters and input them for you.
+				</p>
+
+				<p>
+					To ensure an accurate output, please abide by the following guidelines:
+				</p>
+
+				<ul>
+					<li>Readable font</li>
+					<li>20px text or larger</li>
+					<li>Dark text on a light background</li>
+					<li>No other marks on image</li>
+				</ul>
+
+				<p>
+					Following the guidelines above will ensure the output is as accurate as possible.
+				</p>
 			</div>
 
-			<input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
-
 			<div id="inputWrapper">
+				<input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
 				<input type="file" name="file" id="file" />
 				<input type="submit" value="Upload" id="uploadBtn" />
 			</div>
