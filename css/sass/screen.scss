@@ -36,17 +36,28 @@ body {
 }
 
 header {
+	@extend .clearfix;
 	max-width: $width;
 	margin: 10px auto;
 	padding: 0 8px;
 
 	h1 {
+		float: left;
 		color: #37352F;
 		margin: 0;
 
 		a {
 			color: inherit;
 			text-decoration: none;
+		}
+	}
+
+	#shareButtons {
+		float: right;
+
+		.twitter-share-button {
+			width: 75px !important;
+			margin-top: 8px;
 		}
 	}
 }
