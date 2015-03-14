@@ -123,12 +123,16 @@ $(document).ready(function() {
 	}
 
 	function not_found() {
-		var not_found = $('#not_found').html().split(' ');
+		var not_found = $('#not_found').html();
 
-		for(var i = 0; i < not_found.length - 1; i++) {
-			$('form#words input').filter(function() {
-				return this.value === not_found[i];
-			}).addClass('not_found');
+		if (not_found != undefined) {
+			not_found = not_found.split(' ');
+
+			for(var i = 0; i < not_found.length; i++) {
+				$('form#words input').filter(function() {
+					return this.value === not_found[i];
+				}).addClass('not_found');
+			}
 		}
 	}
 

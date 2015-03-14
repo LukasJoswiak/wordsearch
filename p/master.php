@@ -33,17 +33,18 @@
 
 	  ga('create', 'UA-10943451-27', 'lukasjoswiak.com');
 	  ga('send', 'pageview');
+
 	</script>
 
 	<script>
-		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+		window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
 	</script>
 
 	<header>
 		<h1><a href="/">Word Search Solver</a></h1>
 
-		<div id="shareButtons">
-			<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-size="large" data-text="Check out this solved word search!">Tweet</a>
+		<div class="share-buttons">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-size="large" data-count="none" data-text="Check out this solved word search!">Tweet</a>
 		</div>
 	</header>
 
@@ -68,6 +69,22 @@
 
 			<input type="submit" value="Save" class="submit" />
 		</form>
+
+		<div id="puzzle-ad">
+			<?php $whitelist = array('127.0.0.1', '::1'); if (!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) { ?>
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Wordsearch -->
+			<ins class="adsbygoogle"
+			     style="display:inline-block;width:728px;height:90px"
+			     data-ad-client="ca-pub-5514616542575292"
+			     data-ad-slot="9279803018"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+			<?php } else { ?>
+			<img src="" width="728" height="90" />
+			<?php } ?>
+		</div>
 
 		<form action="" method="POST" id="words">
 			<?php

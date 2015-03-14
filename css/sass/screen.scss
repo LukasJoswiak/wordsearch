@@ -52,13 +52,9 @@ header {
 		}
 	}
 
-	#shareButtons {
+	.share-buttons{
 		float: right;
-
-		.twitter-share-button {
-			width: 75px !important;
-			margin-top: 8px;
-		}
+		margin-top: 10px;
 	}
 }
 
@@ -67,10 +63,6 @@ main {
 	max-width: $width;
 	margin: 0 auto;
 	padding: 0 8px;
-
-	p {
-
-	}
 
 	#width, #height, #url {
 		display: none;
@@ -163,16 +155,12 @@ main {
 	form#ocr {
 		#info {
 			margin-bottom: 8px;
-
-			p {
-				margin: 10px 0;
-			}
 		}
 
 		#inputWrapper {
 			@extend .clearfix;
 			width: 75%;
-			margin: 20px auto;
+			margin: 0 auto;
 
 			input[type=file] {
 				float: left;
@@ -238,13 +226,19 @@ main {
 		}
 	}
 
+	#puzzle-ad {
+		width: 728px;
+		margin: 15px auto;
+	}
+
 	form#words {
 		@extend .clearfix;
-		margin-top: 20px;
+		//margin-top: 20px;
 
 		input {
 			width: 100%;
 			font-size: 1.2em;
+			margin: 2px 0;
 
 			&[type=button], &[type=submit] {
 				width: 49.8%;
@@ -298,11 +292,16 @@ main {
 			}
 		}
 	}
+
+	#homepage-ad {
+		width: 720px;
+		margin: 20px auto;
+	}
 }
 
 footer {
 	max-width: $width;
-	margin: 30px auto 10px auto;
+	margin: 10px auto 10px auto;
 	padding: 8px;
 	border-top: 1px solid #ADADAD;
 

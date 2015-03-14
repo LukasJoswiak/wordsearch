@@ -11,7 +11,7 @@
 		if(isset($_POST['update'][0]) && is_numeric($_POST['update']))
 			$update = htmlspecialchars(strip_tags($_POST['update']), ENT_QUOTES, 'UTF-8');
 
-		$url = substr(uniqid('', true), -5);
+		$url = substr(uniqid('', true), -7);
 
 		if($general->new_puzzle($width, $height, $url, $update, $type, 0)) {
 			echo $url;

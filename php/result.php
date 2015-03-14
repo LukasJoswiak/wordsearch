@@ -45,6 +45,7 @@
 
 							if($loc !== false) {
 								array_push($final_words, strtolower(implode("", $word_split)));
+
 								foreach($loc as $key_l => $comb) {
 									$explode = explode(",", $comb);
 									$row = $explode[0];
@@ -169,11 +170,13 @@
 	}
 
 	echo "<div id='not_found'>";
+	$string = '';
 	foreach($words as $word) {
-		if(!in_array($word, $final_words)) {
-			echo $word . ' ';
+		if(!in_array(strtolower($word), $final_words)) {
+			$string .= $word . ' ';
 		}
 	}
+	echo trim($string);
 	echo "</div>";
 
 	$fix = '';

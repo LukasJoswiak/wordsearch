@@ -31,7 +31,7 @@
 	<header>
 		<h1>Word Search Solver</h1>
 
-		<div id="shareButtons">
+		<div class="share-buttons">
 			<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-size="large" data-text="Solve any word search!">Tweet</a>
 		</div>
 	</header>
@@ -96,6 +96,22 @@
 			<img src="" alt="image" id="wordsearchImage" />
 
 			<button id="cropImage">Crop</button>
+		</div>
+
+		<div id="homepage-ad">
+			<?php $whitelist = array('127.0.0.1', '::1'); if (!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) { ?>
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Wordsearch -->
+			<ins class="adsbygoogle"
+			     style="display:inline-block;width:728px;height:90px"
+			     data-ad-client="ca-pub-5514616542575292"
+			     data-ad-slot="9279803018"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+			<?php } else { ?>
+			<img src="" width="728" height="90" />
+			<?php } ?>
 		</div>
 	</main>
 
