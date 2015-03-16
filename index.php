@@ -3,9 +3,6 @@
 <head>
 	<title>Word Search Solver</title>
 
-	<script src="//use.typekit.net/hay7fha.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
-
 	<link rel="stylesheet" href="/css/screen.css" />
 	<link rel="stylesheet" href="/css/Jcrop.min.css" />
 

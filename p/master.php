@@ -16,9 +16,6 @@
 <head>
 	<title>Word Search Solver</title>
 
-	<script src="//use.typekit.net/hay7fha.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
-
 	<link rel="stylesheet" href="/css/screen.css" />
 
 	<script src="/js/jquery.min.js"></script>
@@ -89,12 +86,13 @@
 		<form action="" method="POST" id="words">
 			<?php
 				for($i = 0; $i < count($words); $i++) {
-					echo '<input type="text" name="word[]" value="' . $words[$i] . '" placeholder="Word" />';
+					echo '<div><input type="text" name="word[]" value="' . $words[$i] . '" placeholder="Word" />';
+					echo '<img src="/img/word_show.png" id="circle" alt="show highlight" current-count="0" title="Change View" /></div>';
 				}
 			?>
 
-			<input type="button" value="Add Word" id="add_word" />
-			<input type="submit" value="Save" class="submit" />
+			<div><input type="button" value="Add Word" id="add_word" /></div>
+			<div id="submit_words"><input type="submit" value="Save" class="submit" /></div>
 		</form>
 
 		<?php

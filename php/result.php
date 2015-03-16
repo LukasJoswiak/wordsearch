@@ -186,19 +186,29 @@
 		echo "<div id='" . $fix . "'>";
 		foreach($row as $key_col => $column) {
 			$word = '';
+			$final_word_list = array();
 			if($words) {
 				for($i = 0; $i < count($final); $i++) {
 					if($final[$i][0] === $key_row . '-' . $key_col) {
+						array_push($final_word_list, $final_words[$i]);
 						$word = 'first';
 					} else if(end($final[$i]) === $key_row . '-' . $key_col) {
+						array_push($final_word_list, $final_words[$i]);
 						$word = 'last';
 					} else if(in_array($key_row . '-' . $key_col, $final[$i])) {
+						array_push($final_word_list, $final_words[$i]);
 						$word = 'word';
 					}
 				}
 			}
 
-			echo "<span class='" . $word . "'>" . $column . "</span>";
+			$final_word_list_string = '';
+			foreach ($final_word_list as $final_word) {
+				$final_word_list_string .= $final_word . ' ';
+			}
+			$final_word_list_string = trim($final_word_list_string);
+
+			echo "<span class='" . $word . "' encapsulated-words='" . $final_word_list_string . "'>" . $column . "</span>";
 		}
 		echo "</div>";
 	}

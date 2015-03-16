@@ -1,5 +1,8 @@
-$sans-serif-font: "proxima-nova", sans-serif;
-$sans-serif-header-font: "proxima-nova", sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Inconsolata:400);
+
+$sans-serif-font: "Open Sans", sans-serif;
+$sans-serif-header-font: "Open Sans", sans-serif;
 $font-size: 1.8em;
 
 $width: 800px;
@@ -35,6 +38,10 @@ body {
 	border: 1px solid #FF0000 !important;
 }
 
+.hidden {
+	display: none;
+}
+
 header {
 	@extend .clearfix;
 	max-width: $width;
@@ -42,6 +49,8 @@ header {
 	padding: 0 8px;
 
 	h1 {
+		font-family: $sans-serif-header-font;
+		font-weight: 700;
 		float: left;
 		color: #37352F;
 		margin: 0;
@@ -235,25 +244,41 @@ main {
 		@extend .clearfix;
 		//margin-top: 20px;
 
-		input {
-			width: 100%;
-			font-size: 1.2em;
+		div {
+			position: relative;
 			margin: 2px 0;
 
-			&[type=button], &[type=submit] {
-				width: 49.8%;
+			input {
+				width: 100%;
+				font-size: 1.2em;
+				padding-right: 44px;
+
+				&[type=button], &[type=submit] {
+					width: 49.8%;
+				}
+
+				&[type=button] {
+					float: left;
+				}
+
+				&[type=submit] {
+					float: right;
+				}
+
+				&.not_found {
+					border: 1px solid #FF0000;
+					padding-right: 10px;
+
+				}
 			}
 
-			&[type=button] {
-				float: left;
-			}
-
-			&[type=submit] {
-				float: right;
-			}
-
-			&.not_found {
-				border: 1px solid #FF0000;
+			img {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 44px;
+				height: 44px;
+				cursor: pointer;
 			}
 		}
 	}
@@ -262,6 +287,7 @@ main {
 		font-family: "inconsolata", monospace;
 		font-size: 1.6em;
 		text-align: center;
+		margin-bottom: 30px;
 
 		div#not_found {
 			display: none;
@@ -288,6 +314,15 @@ main {
 
 				&.word {
 					background: #D8D8D8;
+				}
+
+				&.highlight {
+					background: #EBEB00;
+				}
+
+				&.hide {
+					background: none;
+					border: 0 !important;
 				}
 			}
 		}
