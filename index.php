@@ -99,11 +99,12 @@
 		<div id="homepage-ad">
 			<?php $whitelist = array('127.0.0.1', '::1'); if (!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) { ?>
 			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- Wordsearch -->
+			<!-- Wordsearch Responsive -->
 			<ins class="adsbygoogle"
-			     style="display:inline-block;width:728px;height:90px"
+			     style="display:block"
 			     data-ad-client="ca-pub-5514616542575292"
-			     data-ad-slot="9279803018"></ins>
+			     data-ad-slot="4885430613"
+			     data-ad-format="auto"></ins>
 			<script>
 			(adsbygoogle = window.adsbygoogle || []).push({});
 			</script>
