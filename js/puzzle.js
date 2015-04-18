@@ -81,8 +81,8 @@ $(document).ready(function() {
 	$('form#words div input[type=text]').each(function() {
 		words.push($(this).val());
 	});
-	var highlightedWords = [];
-	/*var */hiddenWords = [];
+	varhighlightedWords = [];
+	varhiddenWords = [];
 
 	$(document).on('keydown', 'form#words input[type=text]', function(e) {
 		var code = e.keyCode || e.which;
@@ -116,31 +116,31 @@ $(document).ready(function() {
 		}
 	}).on('keyup', 'form#words input[type=text]', function() {
 		clearTimeout(timer);
-		var inputValue = $(this).val();
+		var inputValue = $(this).val().toLowerCase();
 		timer = setTimeout(function(e) {
 			if (inputValue.length > 0) {
 				$('form#words').trigger('submit');
 			}
 		}, 1000);
 	}).on('mouseover', 'form#words div input', function() {
-		var word = $(this).val();
+		var word = $(this).val().toLowerCase();
 		if (word != undefined && word.length > 0 && $(this).next('img').attr('current-count') != 2) {
 			$('span[encapsulated-words~="' + word + '"]').addClass('highlight');
 			highlightedWords.push(word);
 		}
 	}).on('mouseleave', 'form#words div input', function() {
-		var word = $(this).val();
+		var word = $(this).val().toLowerCase();
 		if (word != undefined && word.length > 0 && $(this).next('img').attr('current-count') != 1) {
 			removeHighlight(word);
 		}
-	}).on('click', 'form#words #circle', function() {
+	}).on('click', 'form#words .circle', function() {
 		var counter = $(this).attr('current-count');
 		counter++;
 		if (counter > 2) counter = 0;
 
 		$(this).attr('src', '/img/' + circle[counter].image);
 
-		var word = $(this).prev('input').val();
+		var word = $(this).prev('input').val().toLowerCase();
 
 		if (counter == 2) {
 			$('span[encapsulated-words~="' + word + '"]').each(function() {
@@ -156,20 +156,29 @@ $(document).ready(function() {
 				if (wordsUsingCharacter.length <= 1 || willHide) {
 					$(this).addClass(circle[counter].letterClass);
 				}
-
-				/*
-				if ($(this).attr('encapsulated-words').split(' ').length <= 1) {
-					$(this).addClass(circle[counter].letterClass);
-				}
-				*/
 			});
+			highlightedWords.remove(word);
 			hiddenWords.push(word);
 		} else {
 			if (counter == 0) hiddenWords.remove(word);
 			modifyClassData(word, counter);
 		}
 
-		$('span[encapsulated-words~="' + word + '"]').removeClass(circle[counter].removeClass);
+		$('span[encapsulated-words~="' + word + '"]').each(function() {
+			var wordsUsingCharacter = $(this).attr('encapsulated-words').split(' ');
+			var willRemove = true;
+			for (var i = 0; i < wordsUsingCharacter.length; i++) {
+				if ($.inArray(wordsUsingCharacter[i], highlightedWords) >= 0) {
+					willRemove = false;
+					break;
+				}
+			}
+
+			if (wordsUsingCharacter.length <= 1 || willRemove) {
+				$(this).removeClass(circle[counter].removeClass);
+			}
+		});
+		//$('span[encapsulated-words~="' + word + '"]').removeClass(circle[counter].removeClass);
 
 		if (counter == 1) {
 			highlightedWords.push(word);
@@ -220,14 +229,14 @@ $(document).ready(function() {
 			selector = $('form#words input:focus').parent('div').next('div');
 		}
 
-		selector.before('<div><input type="text" name="word[]" placeholder="Word" /><img src="/img/word_show.png" id="circle" alt="show highlight" current-count="0" title="Change View" /></div>');
+		selector.before('<div><input type="text" name="word[]" placeholder="Word" /><img src="/img/word_show.png" class="circle" alt="show highlight" current-count="0" title="Change View" /></div>');
 		selector.prev('div').children('input').focus();
 	});
 
 	$('form#words').submit(function(e) {
 		e.preventDefault();
 
-		$(this).children('input').removeClass('not_found');
+		$(this).children('div').children('input').removeClass('not_found').next('.circle').removeClass('hidden');
 
 		$(this).find('input[type=text]').filter(function() {
 			return !this.value;

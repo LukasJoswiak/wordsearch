@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- <meta name="viewport" content="width=device-width, user-scalable=yes" /> -->
 	<title>Word Search Solver</title>
 
 	<link rel="stylesheet" href="/css/screen.css" />
@@ -107,7 +108,7 @@
 			(adsbygoogle = window.adsbygoogle || []).push({});
 			</script>
 			<?php } else { ?>
-			<img src="" width="728" height="90" />
+			<img src="" style="width: 100%; height: 90px" />
 			<?php } ?>
 		</div>
 	</main>

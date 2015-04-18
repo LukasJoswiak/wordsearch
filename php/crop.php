@@ -70,6 +70,8 @@
 		$wordsearch = json_encode($wordsearch);
 
 		if($general->new_puzzle($width, $height, $url, $update, $type, $image) && $general->update_puzzle($wordsearch, $url)) {
+			unlink($src);
+			unlink($cropped);
 			echo $url;
 		}
 	}

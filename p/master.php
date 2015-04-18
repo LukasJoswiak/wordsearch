@@ -14,6 +14,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- <meta name="viewport" content="width=device-width, user-scalable=yes" /> -->
+
 	<title>Word Search Solver</title>
 
 	<link rel="stylesheet" href="/css/screen.css" />
@@ -87,7 +89,7 @@
 			<?php
 				for($i = 0; $i < count($words); $i++) {
 					echo '<div><input type="text" name="word[]" value="' . $words[$i] . '" placeholder="Word" />';
-					echo '<img src="/img/word_show.png" id="circle" alt="show highlight" current-count="0" title="Change View" /></div>';
+					echo '<img src="/img/word_show.png" class="circle" alt="show highlight" current-count="0" title="Change View" /></div>';
 				}
 			?>
 
