@@ -61,9 +61,23 @@ header {
 		}
 	}
 
-	.share-buttons{
+	.share-buttons {
 		float: right;
 		margin-top: 10px;
+	}
+
+	@media (max-width: 600px) {
+		h1 {
+			float: none;
+			text-align: center;
+		}
+
+		.share-buttons {
+			float: none;
+			text-align: center;
+			margin-top: 10px;
+			margin-bottom: -5px;
+		}
 	}
 }
 
@@ -124,6 +138,12 @@ main {
 			}
 
 			&[type=submit] {
+				width: 100%;
+			}
+		}
+
+		@media (max-width: 600px) {
+			input {
 				width: 100%;
 			}
 		}
@@ -190,6 +210,36 @@ main {
 					background: #E7E7E7;
 				}
 			}
+
+			@media (max-width: 750px) {
+				width: 100%;
+				text-align: center;
+
+				input {
+					float: none !important;
+					margin: 0 auto;
+
+					&[type=file] {
+						width: 200px;
+						margin: 0 auto;
+					}
+				}
+			}
+
+			@media (max-width: 500px) {
+				input {
+					width: 100% !important;
+
+					&[type=file] {
+						width: 200px !important;
+						margin: 0 auto;
+					}
+
+					&[type=submit] {
+						margin: 20px 0 5px 0;
+					}
+				}
+			}
 		}
 	}
 
@@ -236,7 +286,7 @@ main {
 	}
 
 	#puzzle-ad {
-		width: 728px;
+		max-width: 728px;
 		margin: 15px auto;
 	}
 
@@ -289,6 +339,12 @@ main {
 		text-align: center;
 		margin-bottom: 30px;
 
+		@media (max-width: 600px) {
+			max-width: 100%;
+			overflow-x: auto;
+			left: 0 !important;
+		}
+
 		div#not_found {
 			display: none;
 		}
@@ -329,7 +385,7 @@ main {
 	}
 
 	#homepage-ad {
-		width: 720px;
+		max-width: 720px;
 		margin: 20px auto;
 	}
 }

@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- <meta name="viewport" content="width=device-width, user-scalable=yes" /> -->
+	<meta name="viewport" content="width=device-width, user-scalable=yes" />
 
 	<title>Word Search Solver</title>
 
@@ -81,7 +81,7 @@
 			(adsbygoogle = window.adsbygoogle || []).push({});
 			</script>
 			<?php } else { ?>
-			<img src="" width="728" height="90" />
+			<img src="" style="width: 100%; height: 90px" />
 			<?php } ?>
 		</div>
 
@@ -96,11 +96,6 @@
 			<div><input type="button" value="Add Word" id="add_word" /></div>
 			<div id="submit_words"><input type="submit" value="Save" class="submit" /></div>
 		</form>
-
-		<?php
-			// $word = $words[0];
-
-		?>
 
 		<p id="desc">Circles with solid outlines are the first letter of the word. Circles with dashed outlines are the last letter of the word. Words outlined in red above were not found in the puzzle.</p>
 
