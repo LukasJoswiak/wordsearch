@@ -81,8 +81,8 @@ $(document).ready(function() {
 	$('form#words div input[type=text]').each(function() {
 		words.push($(this).val());
 	});
-	varhighlightedWords = [];
-	varhiddenWords = [];
+	var highlightedWords = [];
+	var hiddenWords = [];
 
 	$(document).on('keydown', 'form#words input[type=text]', function(e) {
 		var code = e.keyCode || e.which;
