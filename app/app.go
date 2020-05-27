@@ -1,27 +1,22 @@
 package app
 
 import (
+    "wordsearch/config"
     "wordsearch/db"
 )
 
 type App struct {
+    Config *config.Config
     Database *db.Database
 }
 
-func New() (*App, error) {
-    app := &App{}
-
-    dbConfig, err := db.InitConfig()
+func New(config *config.Config) (*App, error) {
+    db,  err := db.InitDB(config.Database)
     if err != nil {
         return nil, err
     }
 
-    app.Database, err = db.InitDB(dbConfig)
-    if err != nil {
-        return nil, err
-    }
-
-    return app, nil
+    return &App{config, db}, nil
 }
 
 func (app *App) Close() error {

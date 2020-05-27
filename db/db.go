@@ -11,7 +11,7 @@ type Database struct {
 
 func InitDB(config *Config) (*Database, error) {
     // TODO: Move database password to configuration
-    db, err := sql.Open("mysql", "root:password@/" + config.databaseName)
+    db, err := sql.Open("mysql", "root:password@/" + config.DatabaseName)
     if err != nil {
         log.Fatal(err)
     }
@@ -64,5 +64,6 @@ func (db *Database) CreateTables() {
 }
 
 func (db *Database) Close() error {
+    log.Print("closing connection to database")
     return db.db.Close()
 }

@@ -1,0 +1,31 @@
+package handlers
+
+import (
+    "net/http"
+
+    "github.com/gorilla/mux"
+
+    "wordsearch/app"
+)
+
+type Environment struct {
+    app *app.App
+}
+
+func New(app *app.App) *Environment {
+    env := &Environment{app: app}
+    return env
+}
+
+func (env *Environment) Init(r *mux.Router) {
+    staticFileDirectory := http.Dir("./assets/")
+    staticFileHandler := http.StripPrefix("/static/", http.FileServer(staticFileDirectory))
+    r.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
+
+    r.HandleFunc("/", env.homeHandler)
+    // r.HandleFunc("/p/{id:[0-9]+}", env.editHandler)
+    // r.HandleFunc("/v/{id:[0-9]+}", env.viewHandler)
+
+    s := r.PathPrefix("/api").Subrouter()
+    s.HandleFunc("/puzzle/{id:[0-9]+}", env.getPuzzleHandler).Methods("GET")
+}

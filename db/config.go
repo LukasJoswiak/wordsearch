@@ -1,12 +1,12 @@
 package db
 
 type Config struct {
-    databaseName string
+    DatabaseName string
 }
 
 func InitConfig() (*Config, error) {
     config := &Config{
-        databaseName: "wordsearch",
+        DatabaseName: "wordsearch",
     }
 
     return config, nil
