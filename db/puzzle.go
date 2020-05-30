@@ -17,9 +17,9 @@ func (db *Database) CreatePuzzle(puzzle *models.Puzzle) error {
 func (db *Database) GetPuzzle(url string) (*models.Puzzle, error) {
     puzzle := &models.Puzzle{}
 
-    // TODO: Change back to URL
-    row := db.db.QueryRow(`SELECT width, height, data FROM puzzles WHERE id = ?`, url)
-    err := row.Scan(&puzzle.Width, &puzzle.Height, &puzzle.Data)
+    // TODO: Change id back to url
+    row := db.db.QueryRow(`SELECT id, width, height, data FROM puzzles WHERE id = ?`, url)
+    err := row.Scan(&puzzle.ID, &puzzle.Width, &puzzle.Height, &puzzle.Data)
     if err != nil {
         if err == sql.ErrNoRows {
             return nil, err

@@ -11,8 +11,8 @@ import (
 func (env *Environment) getPuzzleHandler(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
 
-    puzzles, err := env.app.GetPuzzle(vars["id"])
-    puzzleListBytes, err := json.Marshal(puzzles)
+    puzzle, err := env.app.GetPuzzle(vars["url"])
+    puzzleListBytes, err := json.Marshal(puzzle)
     if err != nil {
         fmt.Println(fmt.Errorf("error: %v", err))
         w.WriteHeader(http.StatusInternalServerError)

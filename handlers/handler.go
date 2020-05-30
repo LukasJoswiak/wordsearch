@@ -23,9 +23,9 @@ func (env *Environment) Init(r *mux.Router) {
     r.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
 
     r.HandleFunc("/", env.homeHandler)
-    // r.HandleFunc("/p/{id:[0-9]+}", env.editHandler)
-    // r.HandleFunc("/v/{id:[0-9]+}", env.viewHandler)
+    r.HandleFunc("/p/{url:[0-9]+}", env.editHandler)
+    // r.HandleFunc("/v/{url:[0-9]+}", env.viewHandler)
 
     s := r.PathPrefix("/api").Subrouter()
-    s.HandleFunc("/puzzle/{id:[0-9]+}", env.getPuzzleHandler).Methods("GET")
+    s.HandleFunc("/puzzle/{url:[0-9]+}", env.getPuzzleHandler).Methods("GET")
 }
