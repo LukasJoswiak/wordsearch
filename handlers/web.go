@@ -9,10 +9,13 @@ import (
     "wordsearch/models"
 )
 
-var templates = template.Must(template.ParseFiles("templates/home.html", "templates/puzzle.html"))
+var templates = map[string]*template.Template{
+    "home": template.Must(template.ParseFiles("templates/home.html", "templates/base.html")),
+    "puzzle": template.Must(template.ParseFiles("templates/puzzle.html", "templates/base.html")),
+}
 
 func renderTemplate(w http.ResponseWriter, tmpl string, puzzle *models.Puzzle) {
-    err := templates.ExecuteTemplate(w, tmpl + ".html", puzzle)
+    err := templates[tmpl].ExecuteTemplate(w, "base", puzzle)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
     }

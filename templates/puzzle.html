@@ -1,4 +1,9 @@
-URL: {{ .URL }}
-Width: {{ .Width }}
-Height: {{ .Height }}
-Data: {{ .Data }}
+{{define "title"}}Edit Puzzle{{end}}
+
+{{define "body"}}
+<h1>Puzzle</h1>
+URL: {{.URL}}
+Width: {{.Width}}
+Height: {{.Height}}
+Data: {{.Data}}
+{{end}}
