@@ -4,9 +4,11 @@ import (
     "fmt"
     "log"
     "net/http"
+    "os"
     "time"
 
     "github.com/gorilla/mux"
+    ghandlers "github.com/gorilla/handlers"
     _ "github.com/go-sql-driver/mysql"
 
     "wordsearch/app"
@@ -27,8 +29,11 @@ func main() {
     env := handlers.New(app)
     env.Init(r)
 
+    // TODO: log to file
+    loggedRouter := ghandlers.LoggingHandler(os.Stdout, r)
+
     server := &http.Server{
-        Handler: r,
+        Handler: ghandlers.CompressHandler(loggedRouter),
         Addr: fmt.Sprintf(":%d", config.Port),
         WriteTimeout: 15 * time.Second,
         ReadTimeout: 15 * time.Second,
