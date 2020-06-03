@@ -26,6 +26,8 @@ func (env *Environment) Init(r *mux.Router) {
     r.HandleFunc("/p/{url:[0-9]+}", env.editHandler)
     // r.HandleFunc("/v/{url:[0-9]+}", env.viewHandler)
 
+    r.HandleFunc("/create", env.createPuzzleHandler).Methods("POST");
+
     s := r.PathPrefix("/api").Subrouter()
     s.HandleFunc("/puzzle/{url:[0-9]+}", env.getPuzzleHandler).Methods("GET")
 }
