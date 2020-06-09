@@ -44,10 +44,17 @@ func (db *Database) CreateTables() {
     createWords := `
         CREATE TABLE IF NOT EXISTS words (
             id INT NOT NULL AUTO_INCREMENT,
-            puzzle_id INT NOT NULL,
-            word VARCHAR(255) NOT NULL,
-            deleted BOOLEAN NOT NULL,
-            PRIMARY KEY (id),
+            word VARCHAR(255) NOT NULL UNIQUE,
+            PRIMARY KEY (id)
+        );
+    `
+
+    createPuzzleWords := `
+        CREATE TABLE IF NOT EXISTS puzzle_words (
+            word_id INT,
+            puzzle_id INT,
+            PRIMARY KEY (word_id, puzzle_id),
+            FOREIGN KEY (word_id) REFERENCES words(id),
             FOREIGN KEY (puzzle_id) REFERENCES puzzles(id)
         );
     `
@@ -58,6 +65,11 @@ func (db *Database) CreateTables() {
     }
 
     _, err = db.db.Exec(createWords)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = db.db.Exec(createPuzzleWords)
     if err != nil {
         log.Fatal(err)
     }

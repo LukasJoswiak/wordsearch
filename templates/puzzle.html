@@ -1,7 +1,17 @@
 {{define "title"}}Edit Puzzle{{end}}
 
 {{define "body"}}
-<h1>Puzzle</h1>
+<h2>Words</h2>
+<form action="/api/words/update/{{.URL}}" method="POST">
+    <input type="text" data-word="Words.0.Word" name="Words.0.Word">
+    <input type="text" data-word="Words.1.Word" name="Words.1.Word">
+    <input type="text" data-word="Words.2.Word" name="Words.2.Word">
+    <input type="text" data-word="Words.3.Word" name="Words.3.Word">
+    <input type="text" data-word="Words.4.Word" name="Words.4.Word">
+    <input type="submit" value="Submit">
+</form>
+
+<h2>Puzzle</h2>
 URL: {{.URL}}
 Width: {{.Width}}
 Height: {{.Height}}

@@ -1,7 +1,6 @@
 package app
 
 import (
-    "fmt"
     "math/rand"
     "strconv"
     "time"
@@ -15,8 +14,6 @@ const (
 )
 
 func (app *App) CreatePuzzle(body string) (string, error) {
-    fmt.Printf("Body: %s", body)
-
     rand.Seed(time.Now().UnixNano())
     url := strconv.Itoa(rand.Intn(max - min) + min)
 
@@ -37,5 +34,6 @@ func (app *App) GetPuzzle(url string) (*models.Puzzle, error) {
     if err != nil {
         return nil, err
     }
+    puzzle.URL = url
     return puzzle, nil
 }
