@@ -1,7 +1,7 @@
 package config
 
 import (
-    "wordsearch/db"
+    "github.com/LukasJoswiak/wordsearch/db"
 )
 
 type Config struct {

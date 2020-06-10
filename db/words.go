@@ -4,7 +4,7 @@ import (
     "fmt"
     "strings"
 
-    "wordsearch/models"
+    "github.com/LukasJoswiak/wordsearch/models"
 )
 
 // Returns a list of words for the given puzzle ID.

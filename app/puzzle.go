@@ -5,7 +5,7 @@ import (
     "strconv"
     "time"
 
-    "wordsearch/models"
+    "github.com/LukasJoswiak/wordsearch/models"
 )
 
 const (

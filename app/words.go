@@ -1,7 +1,7 @@
 package app
 
 import (
-    "wordsearch/models"
+    "github.com/LukasJoswiak/wordsearch/models"
 )
 
 func (app *App) GetWords(puzzleId int) (*models.Words, error) {

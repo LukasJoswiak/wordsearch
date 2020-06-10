@@ -5,7 +5,7 @@ import (
 
     "github.com/gorilla/mux"
 
-    "wordsearch/app"
+    "github.com/LukasJoswiak/wordsearch/app"
 )
 
 type Environment struct {

@@ -5,7 +5,7 @@ import (
     "log"
     "time"
 
-    "wordsearch/models"
+    "github.com/LukasJoswiak/wordsearch/models"
 )
 
 func (db *Database) CreatePuzzle(puzzle *models.Puzzle) error {

@@ -11,7 +11,7 @@ type Database struct {
 
 func InitDB(config *Config) (*Database, error) {
     // TODO: Move database password to configuration
-    db, err := sql.Open("mysql", "root:password@/" + config.DatabaseName)
+    db, err := sql.Open("mysql", "root:password@/")
     if err != nil {
         log.Fatal(err)
     }
@@ -22,9 +22,38 @@ func InitDB(config *Config) (*Database, error) {
     }
 
     database := &Database{db}
+    database.CreateDatabase(config.DatabaseName)
+    database.UseDatabase(config.DatabaseName)
     database.CreateTables()
 
     return database, nil
+}
+
+func (db *Database) CreateDatabase(database string) {
+    createDatabase := "CREATE DATABASE IF NOT EXISTS " + database
+
+    _, err := db.db.Exec(createDatabase)
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+
+func (db *Database) UseDatabase(database string) {
+    useDatabase := "USE " + database
+
+    _, err := db.db.Exec(useDatabase)
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+
+func (db *Database) DropDatabase(database string) {
+    dropDatabase := "DROP DATABASE " + database
+
+    _, err := db.db.Exec(dropDatabase)
+    if err != nil {
+        log.Fatal(err)
+    }
 }
 
 func (db *Database) CreateTables() {
@@ -38,7 +67,7 @@ func (db *Database) CreateTables() {
             type TINYINT NOT NULL,
             datetime DATETIME NOT NULL,
             PRIMARY KEY (id)
-        );
+        )
     `
 
     createWords := `
@@ -46,7 +75,7 @@ func (db *Database) CreateTables() {
             id INT NOT NULL AUTO_INCREMENT,
             word VARCHAR(255) NOT NULL UNIQUE,
             PRIMARY KEY (id)
-        );
+        )
     `
 
     createPuzzleWords := `
@@ -56,7 +85,7 @@ func (db *Database) CreateTables() {
             PRIMARY KEY (word_id, puzzle_id),
             FOREIGN KEY (word_id) REFERENCES words(id),
             FOREIGN KEY (puzzle_id) REFERENCES puzzles(id)
-        );
+        )
     `
 
     _, err := db.db.Exec(createPuzzles)
@@ -76,6 +105,5 @@ func (db *Database) CreateTables() {
 }
 
 func (db *Database) Close() error {
-    log.Print("closing connection to database")
     return db.db.Close()
 }

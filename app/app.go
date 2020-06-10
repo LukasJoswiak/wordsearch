@@ -1,8 +1,8 @@
 package app
 
 import (
-    "wordsearch/config"
-    "wordsearch/db"
+    "github.com/LukasJoswiak/wordsearch/config"
+    "github.com/LukasJoswiak/wordsearch/db"
 )
 
 type App struct {
@@ -11,7 +11,7 @@ type App struct {
 }
 
 func New(config *config.Config) (*App, error) {
-    db,  err := db.InitDB(config.Database)
+    db, err := db.InitDB(config.Database)
     if err != nil {
         return nil, err
     }

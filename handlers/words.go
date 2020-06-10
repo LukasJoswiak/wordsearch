@@ -7,7 +7,7 @@ import (
     "github.com/gorilla/mux"
     "github.com/gorilla/schema"
 
-    "wordsearch/models"
+    "github.com/LukasJoswiak/wordsearch/models"
 )
 
 var decoder = schema.NewDecoder()

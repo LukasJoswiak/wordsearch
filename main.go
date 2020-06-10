@@ -11,9 +11,9 @@ import (
     ghandlers "github.com/gorilla/handlers"
     _ "github.com/go-sql-driver/mysql"
 
-    "wordsearch/app"
-    "wordsearch/config"
-    "wordsearch/handlers"
+    "github.com/LukasJoswiak/wordsearch/app"
+    "github.com/LukasJoswiak/wordsearch/config"
+    "github.com/LukasJoswiak/wordsearch/handlers"
 )
 
 func main() {
