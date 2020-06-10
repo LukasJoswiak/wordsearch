@@ -23,7 +23,7 @@ func (env *Environment) wordsHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    var words models.Words
+    var words models.WordsForm
     err = decoder.Decode(&words, r.PostForm)
     if err != nil {
         fmt.Println(fmt.Errorf("error: %v", err))

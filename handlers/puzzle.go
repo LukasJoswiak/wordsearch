@@ -29,8 +29,9 @@ func (env *Environment) createPuzzleHandler(w http.ResponseWriter, r *http.Reque
 
 func (env *Environment) getPuzzleHandler(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
+    url := vars["url"]
 
-    puzzle, err := env.app.GetPuzzle(vars["url"])
+    puzzle, err := env.app.GetPuzzle(url)
     puzzleListBytes, err := json.Marshal(puzzle)
     if err != nil {
         fmt.Println(fmt.Errorf("error: %v", err))

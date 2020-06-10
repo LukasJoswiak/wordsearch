@@ -2,18 +2,20 @@
 
 {{define "body"}}
 <h2>Words</h2>
-<form action="/api/words/update/{{.URL}}" method="POST">
-    <input type="text" data-word="Words.0.Word" name="Words.0.Word">
-    <input type="text" data-word="Words.1.Word" name="Words.1.Word">
-    <input type="text" data-word="Words.2.Word" name="Words.2.Word">
-    <input type="text" data-word="Words.3.Word" name="Words.3.Word">
-    <input type="text" data-word="Words.4.Word" name="Words.4.Word">
+<form action="/api/words/update/{{.puzzle.URL}}" method="POST">
+    {{range $i, $word := .words.Words}}
+    <input type="hidden" name="Words.{{$i}}.ExistingWord" value="{{$word.Word}}">
+    <input type="text" name="Words.{{$i}}.Word" value="{{$word.Word}}">
+    {{end}}
     <input type="submit" value="Submit">
 </form>
 
 <h2>Puzzle</h2>
+{{with .puzzle}}
 URL: {{.URL}}
 Width: {{.Width}}
 Height: {{.Height}}
 Data: {{.Data}}
+{{end}}
+
 {{end}}

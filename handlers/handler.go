@@ -31,6 +31,4 @@ func (env *Environment) Init(r *mux.Router) {
     s.HandleFunc("/puzzle/create", env.createPuzzleHandler).Methods("POST");
 
     s.HandleFunc("/words/update/{url:[0-9]+}", env.wordsHandler).Methods("POST")
-
-
 }
