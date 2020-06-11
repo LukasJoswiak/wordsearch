@@ -31,6 +31,10 @@ func (db *Database) GetWords(puzzleId int) (*models.Words, error) {
         wordIds = append(wordIds, wordId)
     }
 
+    if len(wordIds) == 0 {
+        return words, nil
+    }
+
     sql = `SELECT word
             FROM words
             WHERE id IN (%s)`
