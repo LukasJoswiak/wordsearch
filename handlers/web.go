@@ -37,6 +37,7 @@ func (env *Environment) editHandler(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
     }
+
     renderTemplate(w, "puzzle", map[string]interface{}{
         "puzzle": puzzle,
         "words": words,

@@ -7,6 +7,8 @@
     <input type="hidden" name="Words.{{$i}}.ExistingWord" value="{{$word.Word}}">
     <input type="text" name="Words.{{$i}}.Word" value="{{$word.Word}}">
     {{end}}
+    <input type="hidden" name="Words.{{len .words.Words}}.ExistingWord">
+    <input type="text" name="Words.{{len .words.Words}}.Word">
     <input type="submit" value="Submit">
 </form>
 
