@@ -1,6 +1,7 @@
-{{define "title"}}Edit Puzzle{{end}}
+{{define "title"}}Puzzle{{end}}
 
 {{define "body"}}
+<a>Clone</a>
 <h2>Words</h2>
 <form action="/api/words/update/{{.puzzle.URL}}" method="POST">
     {{range $i, $word := .words.Words}}
@@ -14,10 +15,15 @@
 
 <h2>Puzzle</h2>
 {{with .puzzle}}
+<a href="/p/{{.URL}}/edit">Edit</a>
 URL: {{.URL}}
 Width: {{.Width}}
 Height: {{.Height}}
 Data: {{.Data}}
+
+<pre>
+{{.Data}}
+</pre>
 {{end}}
 
 {{end}}

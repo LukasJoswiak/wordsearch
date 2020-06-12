@@ -10,9 +10,10 @@ import (
 var templates = map[string]*template.Template{
     "home": template.Must(template.ParseFiles("templates/home.html", "templates/base.html")),
     "puzzle": template.Must(template.ParseFiles("templates/puzzle.html", "templates/base.html")),
+    "edit_puzzle": template.Must(template.ParseFiles("templates/edit_puzzle.html", "templates/base.html")),
 }
 
-func renderTemplate(w http.ResponseWriter, tmpl string, data map[string]interface{}) {// puzzle *models.Puzzle, words *models.Words) {
+func renderTemplate(w http.ResponseWriter, tmpl string, data map[string]interface{}) {
     err := templates[tmpl].ExecuteTemplate(w, "base", data)
 
     if err != nil {
@@ -24,7 +25,7 @@ func (env *Environment) homeHandler(w http.ResponseWriter, r *http.Request) {
     renderTemplate(w, "home", nil)
 }
 
-func (env *Environment) editHandler(w http.ResponseWriter, r *http.Request) {
+func (env *Environment) editWordsHandler(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     url := vars["url"]
 
@@ -38,8 +39,24 @@ func (env *Environment) editHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, err.Error(), http.StatusInternalServerError)
     }
 
+    // TODO: Solve puzzle here
+
     renderTemplate(w, "puzzle", map[string]interface{}{
         "puzzle": puzzle,
         "words": words,
+    })
+}
+
+func (env *Environment) editPuzzleHandler(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    url := vars["url"]
+
+    puzzle, err := env.app.GetPuzzle(url)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+    }
+
+    renderTemplate(w, "edit_puzzle", map[string]interface{}{
+        "puzzle": puzzle,
     })
 }

@@ -1,0 +1,12 @@
+{{define "title"}}Edit Puzzle{{end}}
+
+{{define "body"}}
+<h1>Edit Puzzle</h1>
+
+<a href="/p/{{.puzzle.URL}}">Cancel</a>
+
+<form action="/api/puzzle/{{.puzzle.URL}}/update" method="POST">
+    <textarea name="body">{{.puzzle.Data}}</textarea>
+    <input type="submit" value="Submit">
+</form>
+{{end}}
