@@ -1,9 +1,9 @@
 {{define "title"}}Puzzle{{end}}
 
 {{define "body"}}
-<a>Clone</a>
+<a href="">Clone (make this a form for POST)</a>
 <h2>Words</h2>
-<form action="/api/words/update/{{.puzzle.URL}}" method="POST">
+<form action="/api/puzzle/{{.puzzle.URL}}/words" method="POST">
     {{range $i, $word := .words.Words}}
     <input type="hidden" name="Words.{{$i}}.ExistingWord" value="{{$word.Word}}">
     <input type="text" name="Words.{{$i}}.Word" value="{{$word.Word}}">
@@ -24,6 +24,20 @@ Data: {{.Data}}
 <pre>
 {{.Data}}
 </pre>
+{{end}}
+
+{{with .solvedPuzzle}}
+{{range $y, $arr := .Locations}}
+<div>
+{{range $x, $location := $arr}}
+{{$class := ""}}
+{{if gt (len $location.Words) 0}}
+{{$class = "highlight"}}
+{{end}}
+<span class="{{$class}}">{{$location.Char}}</span>
+{{end}}
+</div>
+{{end}}
 {{end}}
 
 {{end}}

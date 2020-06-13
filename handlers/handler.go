@@ -31,6 +31,7 @@ func (env *Environment) Init(r *mux.Router) {
     s.HandleFunc("/puzzle/{url:[0-9]+}", env.getPuzzleHandler).Methods("GET")
     s.HandleFunc("/puzzle/create", env.createPuzzleHandler).Methods("POST");
     s.HandleFunc("/puzzle/{url:[0-9]+}/update", env.updatePuzzleHandler).Methods("POST")
+    // s.HandleFunc("/puzzle/{url:[0-9]+}/clone", env.clonePuzzleHandler).Methods("POST")
 
-    s.HandleFunc("/words/update/{url:[0-9]+}", env.wordsHandler).Methods("POST")
+    s.HandleFunc("/puzzle/{url:[0-9]+}/words", env.wordsHandler).Methods("POST")
 }

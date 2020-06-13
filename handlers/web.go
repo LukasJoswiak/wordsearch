@@ -34,16 +34,22 @@ func (env *Environment) editWordsHandler(w http.ResponseWriter, r *http.Request)
         http.Error(w, err.Error(), http.StatusInternalServerError)
     }
 
+    formattedPuzzle, err := env.app.GetFormattedPuzzle(url)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+    }
+
     words, err := env.app.GetWords(puzzle.ID)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
     }
 
-    // TODO: Solve puzzle here
+    solvedPuzzle := env.app.SolvePuzzle(puzzle, words)
 
     renderTemplate(w, "puzzle", map[string]interface{}{
-        "puzzle": puzzle,
+        "puzzle": formattedPuzzle,
         "words": words,
+        "solvedPuzzle": solvedPuzzle,
     })
 }
 
@@ -51,7 +57,7 @@ func (env *Environment) editPuzzleHandler(w http.ResponseWriter, r *http.Request
     vars := mux.Vars(r)
     url := vars["url"]
 
-    puzzle, err := env.app.GetPuzzle(url)
+    puzzle, err := env.app.GetFormattedPuzzle(url)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
     }
