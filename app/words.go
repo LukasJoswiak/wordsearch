@@ -26,8 +26,8 @@ func (app *App) UpdateWords(url string, words models.WordsForm) error {
     wordsRemoved := &models.Words{PuzzleID: puzzle.ID}
 
     for _, word := range words.Words {
-        wordString := strings.ToLower(word.Word)
-        existingWordString := strings.ToLower(word.ExistingWord)
+        wordString := strings.ToLower(strings.TrimSpace(word.Word))
+        existingWordString := strings.ToLower(strings.TrimSpace(word.ExistingWord))
 
         // Ignore words that were unchanged.
         if wordString == existingWordString {

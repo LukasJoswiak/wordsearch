@@ -47,6 +47,7 @@ func (app *App) GetFormattedPuzzle(url string) (*models.Puzzle, error) {
 func sanitizeBody(body string) string {
     body = re.ReplaceAllString(body, ",")
     body = strings.ToLower(body)
+    // TODO: Trim trailing (not leading) whitespace
     return body
 }
 
