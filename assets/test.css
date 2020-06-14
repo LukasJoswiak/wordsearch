@@ -1,3 +1,11 @@
+article#puzzle {
+    font-family: monospace;
+}
+
+.letter {
+    white-space: pre;
+}
+
 .highlight {
     background: yellow;
 }

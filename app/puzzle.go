@@ -16,8 +16,8 @@ const (
 )
 
 // Regular expression for transforming a puzzle from what the user input into
-// a form ready for database insertion.
-var re = regexp.MustCompile(`\r?\n`)
+// a form ready for database insertion. Replaces end of line with a comma.
+var re = regexp.MustCompile(`([ ]*\r?\n)|([ ]*$)`)
 
 var xDir = [...]int{0, 1, 1, 1, 0, -1, -1, -1}
 var yDir = [...]int{-1, -1, 0, 1, 1, 1, 0, -1}
@@ -47,7 +47,6 @@ func (app *App) GetFormattedPuzzle(url string) (*models.Puzzle, error) {
 func sanitizeBody(body string) string {
     body = re.ReplaceAllString(body, ",")
     body = strings.ToLower(body)
-    // TODO: Trim trailing (not leading) whitespace
     return body
 }
 

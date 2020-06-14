@@ -26,6 +26,7 @@ Data: {{.Data}}
 </pre>
 {{end}}
 
+<article id="puzzle">
 {{with .solvedPuzzle}}
 {{range $y, $arr := .Locations}}
 <div>
@@ -34,10 +35,11 @@ Data: {{.Data}}
 {{if gt (len $location.Words) 0}}
 {{$class = "highlight"}}
 {{end}}
-<span class="{{$class}}">{{$location.Char}}</span>
+<span class="letter {{$class}}">{{$location.Char}}</span>
 {{end}}
 </div>
 {{end}}
 {{end}}
+</article>
 
 {{end}}
