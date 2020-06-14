@@ -46,6 +46,7 @@ func (app *App) GetFormattedPuzzle(url string) (*models.Puzzle, error) {
 // insertion into the database.
 func sanitizeBody(body string) string {
     body = re.ReplaceAllString(body, ",")
+    body = strings.ToLower(body)
     return body
 }
 

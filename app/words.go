@@ -1,6 +1,8 @@
 package app
 
 import (
+    "strings"
+
     "github.com/LukasJoswiak/wordsearch/models"
 )
 
@@ -24,8 +26,8 @@ func (app *App) UpdateWords(url string, words models.WordsForm) error {
     wordsRemoved := &models.Words{PuzzleID: puzzle.ID}
 
     for _, word := range words.Words {
-        wordString := word.Word
-        existingWordString := word.ExistingWord
+        wordString := strings.ToLower(word.Word)
+        existingWordString := strings.ToLower(word.ExistingWord)
 
         // Ignore words that were unchanged.
         if wordString == existingWordString {
