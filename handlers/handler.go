@@ -45,7 +45,7 @@ func (env *Environment) Init(r *mux.Router) {
     s := r.PathPrefix("/puzzle").Subrouter()
     s.Handle("/create", Handler{env.createPuzzleHandler}).Methods("POST");
     s.Handle("/{url:[0-9]+}/update", Handler{env.updatePuzzleHandler}).Methods("POST")
-    // s.Handle("/{url:[0-9]+}/clone", Handler{env.clonePuzzleHandler}).Methods("POST")
+    s.Handle("/{url:[0-9]+}/clone", Handler{env.clonePuzzleHandler}).Methods("POST")
 
     s.Handle("/{url:[0-9]+}/words", Handler{env.wordsHandler}).Methods("POST")
 
@@ -68,7 +68,7 @@ func (handler Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         switch e := err.(type) {
         case Error:
-            // TODO: Change format of log to include more info
+            // TODO: Change format of error log to include more info and write to error file defined in config
             log.Printf("HTTP %d - %s", e.Status(), e)
             errorHandler(w, r, e.Status())
         default:

@@ -8,6 +8,7 @@ type Puzzle struct {
     Width  int    `json:"width"`
     Height int    `json:"height"`
     Data   string `json:"data"`
+    Type   int    `json:"type"`
 }
 
 type SolvedPuzzle struct {

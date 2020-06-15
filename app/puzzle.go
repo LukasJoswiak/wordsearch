@@ -56,7 +56,7 @@ func sanitizeBody(body string) string {
     return body
 }
 
-func (app *App) CreatePuzzle(body string) (string, error) {
+func (app *App) CreatePuzzle(body string, puzzleType int) (string, error) {
     rand.Seed(time.Now().UnixNano())
     url := strconv.Itoa(rand.Intn(max - min) + min)
     body = sanitizeBody(body)
@@ -64,6 +64,7 @@ func (app *App) CreatePuzzle(body string) (string, error) {
     puzzle := &models.Puzzle{
         URL: url,
         Data: body,
+        Type: puzzleType,
     }
     err := app.Database.CreatePuzzle(puzzle)
     if err != nil {
@@ -87,6 +88,20 @@ func (app *App) UpdatePuzzle(url string, body string) error {
     }
 
     return nil
+}
+
+func (app *App) ClonePuzzle(url string) (string, error) {
+    puzzle, err := app.GetPuzzle(url)
+    if err != nil {
+        return "", err
+    }
+
+    cloneUrl, err := app.CreatePuzzle(puzzle.Data, 2)
+    if err != nil {
+        return "", err
+    }
+
+    return cloneUrl, nil
 }
 
 func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.SolvedPuzzle {

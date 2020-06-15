@@ -1,7 +1,9 @@
 {{define "title"}}Puzzle{{end}}
 
 {{define "body"}}
-<a href="">Clone (make this a form for POST)</a>
+<form action="/puzzle/{{.solvedPuzzle.URL}}/clone" method="POST">
+    <button type="submit">Clone</button>
+</form>
 <h2>Words</h2>
 <form action="/puzzle/{{.solvedPuzzle.URL}}/words" method="POST">
     {{range $i, $word := .words.Words}}

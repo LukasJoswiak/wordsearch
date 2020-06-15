@@ -10,13 +10,15 @@ import (
 func (db *Database) GetPuzzle(url string) (*models.Puzzle, error) {
     puzzle := &models.Puzzle{}
 
-    row := db.db.QueryRow(`SELECT id, width, height, data FROM puzzles WHERE url = ?`, url)
+    sqlStr := "SELECT id, width, height, data FROM puzzles WHERE url = ?"
+
+    row := db.db.QueryRow(sqlStr, url)
     err := row.Scan(&puzzle.ID, &puzzle.Width, &puzzle.Height, &puzzle.Data)
     if err != nil {
         if err == sql.ErrNoRows {
             return nil, nil
         } else {
-            return nil, err
+            return nil, DBError{sqlStr, err}
         }
     }
 
@@ -35,12 +37,12 @@ func (db *Database) UpdatePuzzle(puzzle *models.Puzzle) error {
 
     stmt, err := db.db.Prepare(sql)
     if err != nil {
-        return err
+        return DBError{sql, err}
     }
 
     _, err = stmt.Exec(puzzle.Data, puzzle.ID)
     if err != nil {
-        return err
+        return DBError{sql, err}
     }
 
     return nil

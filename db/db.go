@@ -5,6 +5,22 @@ import (
     "log"
 )
 
+type DBError struct {
+    QueryString string
+    Err error
+}
+
+func (dbe DBError) Error() string {
+    if dbe.Err != nil {
+        return dbe.Err.Error()
+    }
+    return ""
+}
+
+func (dbe DBError) Query() string {
+    return dbe.QueryString
+}
+
 type Database struct {
     db *sql.DB
 }
