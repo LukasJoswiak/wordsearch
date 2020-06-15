@@ -1,65 +1,50 @@
 package handlers
 
 import (
-    "fmt"
-    "encoding/json"
     "net/http"
 
     "github.com/gorilla/mux"
 )
 
-func (env *Environment) getPuzzleHandler(w http.ResponseWriter, r *http.Request) {
-    vars := mux.Vars(r)
-    url := vars["url"]
-
-    puzzle, err := env.app.GetPuzzle(url)
-    puzzleListBytes, err := json.Marshal(puzzle)
-    if err != nil {
-        fmt.Println(fmt.Errorf("error: %v", err))
-        w.WriteHeader(http.StatusInternalServerError)
-        return
-    }
-
-    w.Write(puzzleListBytes)
-}
-
-func (env *Environment) createPuzzleHandler(w http.ResponseWriter, r *http.Request) {
+func (env *Environment) createPuzzleHandler(w http.ResponseWriter, r *http.Request) error {
     err := r.ParseForm()
     if err != nil {
-        fmt.Println(fmt.Errorf("error: %v", err))
-        w.WriteHeader(http.StatusInternalServerError)
-        return
+        return StatusError{500, err}
     }
 
     body := r.PostFormValue("body")
+    if len(body) == 0 {
+        return StatusError{400, nil}
+    }
+
     url, err := env.app.CreatePuzzle(body)
     if err != nil {
-        fmt.Println(fmt.Errorf("error: %v", err))
-        w.WriteHeader(http.StatusInternalServerError)
-        return
+        return StatusError{500, err}
     }
 
     http.Redirect(w, r, "/p/" + url, http.StatusFound)
+    return nil
 }
 
-func (env *Environment) updatePuzzleHandler(w http.ResponseWriter, r *http.Request) {
+func (env *Environment) updatePuzzleHandler(w http.ResponseWriter, r *http.Request) error {
     vars := mux.Vars(r)
     url := vars["url"]
 
     err := r.ParseForm()
     if err != nil {
-        fmt.Println(fmt.Errorf("error: %v", err))
-        w.WriteHeader(http.StatusInternalServerError)
-        return
+        return StatusError{500, err}
     }
 
     body := r.PostFormValue("body")
+    if len(body) == 0 {
+        return StatusError{400, nil}
+    }
+
     err = env.app.UpdatePuzzle(url, body)
     if err != nil {
-        fmt.Println(fmt.Errorf("error: %v", err))
-        w.WriteHeader(http.StatusInternalServerError)
-        return
+        return StatusError{500, err}
     }
 
     http.Redirect(w, r, "/p/" + url, http.StatusFound)
+    return nil
 }

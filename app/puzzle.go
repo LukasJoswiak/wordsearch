@@ -26,6 +26,8 @@ func (app *App) GetPuzzle(url string) (*models.Puzzle, error) {
     puzzle, err := app.Database.GetPuzzle(url)
     if err != nil {
         return nil, err
+    } else if puzzle == nil {
+        return nil, nil
     }
     puzzle.URL = url
 
@@ -47,6 +49,10 @@ func (app *App) GetFormattedPuzzle(url string) (*models.Puzzle, error) {
 func sanitizeBody(body string) string {
     body = re.ReplaceAllString(body, ",")
     body = strings.ToLower(body)
+    // Remove comma at end of body.
+    if body[len(body) - 1] == ',' {
+        body = body[:len(body) - 1]
+    }
     return body
 }
 
@@ -87,6 +93,7 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
     puzzleArray := puzzle.ToArray()
 
     solvedPuzzle := &models.SolvedPuzzle{}
+    solvedPuzzle.URL = puzzle.URL
 
     // Populate each coordinate with the puzzle letter.
     for i := range puzzleArray {

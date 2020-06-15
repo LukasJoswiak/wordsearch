@@ -2,7 +2,6 @@ package db
 
 import (
     "database/sql"
-    "log"
     "time"
 
     "github.com/LukasJoswiak/wordsearch/models"
@@ -15,9 +14,9 @@ func (db *Database) GetPuzzle(url string) (*models.Puzzle, error) {
     err := row.Scan(&puzzle.ID, &puzzle.Width, &puzzle.Height, &puzzle.Data)
     if err != nil {
         if err == sql.ErrNoRows {
-            return nil, err
+            return nil, nil
         } else {
-            log.Fatal(err)
+            return nil, err
         }
     }
 

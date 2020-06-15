@@ -1,7 +1,6 @@
 package handlers
 
 import (
-    "fmt"
     "net/http"
 
     "github.com/gorilla/mux"
@@ -12,31 +11,26 @@ import (
 
 var decoder = schema.NewDecoder()
 
-func (env *Environment) wordsHandler(w http.ResponseWriter, r *http.Request) {
+func (env *Environment) wordsHandler(w http.ResponseWriter, r *http.Request) error {
     vars := mux.Vars(r)
     url := vars["url"]
 
     err := r.ParseForm()
     if err != nil {
-        fmt.Println(fmt.Errorf("error: %v", err))
-        w.WriteHeader(http.StatusInternalServerError)
-        return
+        return StatusError{500, err}
     }
 
     var words models.WordsForm
     err = decoder.Decode(&words, r.PostForm)
     if err != nil {
-        fmt.Println(fmt.Errorf("error: %v", err))
-        w.WriteHeader(http.StatusInternalServerError)
-        return
+        return StatusError{500, err}
     }
 
     err = env.app.UpdateWords(url, words)
     if err != nil {
-        fmt.Println(fmt.Errorf("error: %v", err))
-        w.WriteHeader(http.StatusInternalServerError)
-        return
+        return StatusError{500, err}
     }
 
     http.Redirect(w, r, "/p/" + url, http.StatusFound)
+    return nil
 }
