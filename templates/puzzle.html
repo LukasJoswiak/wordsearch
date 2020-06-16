@@ -1,37 +1,43 @@
-{{define "title"}}Puzzle{{end}}
+{{define "title"}}Puzzle | {{end}}
 
 {{define "body"}}
 <form action="/puzzle/{{.solvedPuzzle.URL}}/clone" method="POST">
     <button type="submit">Clone</button>
 </form>
-<h2>Words</h2>
-<form action="/puzzle/{{.solvedPuzzle.URL}}/words" method="POST">
-    {{range $i, $word := .words.Words}}
-    <input type="hidden" name="Words.{{$i}}.ExistingWord" value="{{$word.Word}}">
-    <input type="text" name="Words.{{$i}}.Word" value="{{$word.Word}}">
-    {{end}}
-    <input type="hidden" name="Words.{{len .words.Words}}.ExistingWord">
-    <input type="text" name="Words.{{len .words.Words}}.Word">
-    <input type="submit" value="Submit">
-</form>
 
-<h2>Puzzle</h2>
-{{with .solvedPuzzle}}
-<a href="/p/{{.URL}}/edit">Edit</a>
+<section id="content">
+    <aside id="words" class="column">
+        <h2>Words</h2>
+        <form action="/puzzle/{{.solvedPuzzle.URL}}/words" method="POST">
+            {{range $i, $word := .words.Words}}
+            <input type="hidden" name="Words.{{$i}}.ExistingWord" value="{{$word.Word}}">
+            <input type="text" name="Words.{{$i}}.Word" value="{{$word.Word}}">
+            {{end}}
+            <input type="hidden" name="Words.{{len .words.Words}}.ExistingWord">
+            <input type="text" name="Words.{{len .words.Words}}.Word">
+            <input type="submit" value="Submit">
+        </form>
+    </aside>
 
-<article id="puzzle">
-{{range $y, $arr := .Locations}}
-<div>
-{{range $x, $location := $arr}}
-{{$class := ""}}
-{{if gt (len $location.Words) 0}}
-{{$class = "highlight"}}
-{{end}}
-<span class="letter {{$class}}">{{$location.Char}}</span>
-{{end}}
-</div>
-{{end}}
-</article>
-{{end}}
+    <article id="puzzle-container" class="column">
+        {{with .solvedPuzzle}}
+        <a href="/p/{{.URL}}/edit">Edit</a>
 
-{{end}}
+        <article id="puzzle">
+        {{- range $y, $arr := .Locations}}
+            <div class="row">
+            {{- range $x, $location := $arr}}
+                {{- $class := ""}}
+                {{- if gt (len $location.Words) 0}}
+                {{- $class = " highlight"}}
+                {{- end -}}
+                <span class="letter {{- $class}}">{{$location.Char}}</span>
+            {{- end -}}
+            </div>
+        {{- end}}
+        </article>
+        {{end}}
+    </article>
+</section>
+
+{{- end}}

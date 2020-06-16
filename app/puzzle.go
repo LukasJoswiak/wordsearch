@@ -2,9 +2,9 @@ package app
 
 import (
     "math/rand"
+    "regexp"
     "strconv"
     "strings"
-    "regexp"
     "time"
 
     "github.com/LukasJoswiak/wordsearch/models"

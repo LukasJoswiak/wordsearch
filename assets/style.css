@@ -1,0 +1,70 @@
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 8px;
+}
+
+textarea {
+    text-transform: uppercase;
+}
+
+section#content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+section#content .column {
+    margin: 0 8px;
+}
+
+aside#words {
+    max-width: 400px;
+    flex: 1 1 200px;
+}
+
+aside#words h2 {
+    margin: 0;
+}
+
+aside#words form input {
+    width: 100%;
+    font-size: 1.8rem;
+    margin: 5px 0;
+    padding: 6px 4px;
+}
+
+article#puzzle-container {
+    flex: 0 1 content;
+}
+
+article#puzzle {
+    font-family: monospace;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+article#puzzle .row {
+    margin: 20px 0;
+}
+
+article#puzzle .row .letter {
+    white-space: pre;
+    padding: 10px 12px;
+}
+
+article#puzzle .row .highlight {
+    background: yellow;
+}

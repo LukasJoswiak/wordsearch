@@ -1,14 +1,19 @@
-{{define "base"}}
+{{define "base" -}}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{{template "title" .}}</title>
-    <link rel="stylesheet" href="/static/test.css">
+    <title>{{template "title" .}}Word Search Solver</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    {{template "body" .}}
+    <header>
+        <h1>Word Search Solver</h1>
+    </header>
+    <main>
+        {{template "body" .}}
+    </main>
     <footer>Footer</footer>
 </body>
 </html>
-{{end}}
+{{- end}}
