@@ -3,12 +3,13 @@ package models
 import "strings"
 
 type Puzzle struct {
-    ID     int    `json:"id"`
-    URL    string `json:"url"`
-    Width  int    `json:"width"`
-    Height int    `json:"height"`
-    Data   string `json:"data"`
-    Type   int    `json:"type"`
+    ID         int    `json:"id"`
+    URL        string `json:"url"`
+    ViewURL    string `json:"viewUrl"`
+    Width      int    `json:"width"`
+    Height     int    `json:"height"`
+    Data       string `json:"data"`
+    Type       int    `json:"type"`
 }
 
 type SolvedPuzzle struct {

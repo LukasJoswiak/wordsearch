@@ -10,6 +10,7 @@ import (
 var templates = map[string]*template.Template{
     "home": template.Must(template.ParseFiles("templates/home.html", "templates/base.html")),
     "puzzle": template.Must(template.ParseFiles("templates/puzzle.html", "templates/base.html")),
+    "view_puzzle": template.Must(template.ParseFiles("templates/view_puzzle.html", "templates/base.html")),
     "edit_puzzle": template.Must(template.ParseFiles("templates/edit_puzzle.html", "templates/base.html")),
     "error": template.Must(template.ParseFiles("templates/error.html", "templates/base.html")),
 }
@@ -51,6 +52,37 @@ func (env *Environment) editWordsHandler(w http.ResponseWriter, r *http.Request)
     solvedPuzzle := env.app.SolvePuzzle(puzzle, words)
 
     err = renderTemplate(w, "puzzle", map[string]interface{}{
+        "solvedPuzzle": solvedPuzzle,
+        "words": words,
+    })
+    if err != nil {
+        return StatusError{500, err}
+    }
+
+    return nil
+}
+
+func (env *Environment) viewPuzzleHandler(w http.ResponseWriter, r *http.Request) error {
+    vars := mux.Vars(r)
+    url := vars["url"]
+
+    puzzle, err := env.app.GetPuzzleByViewUrl(url)
+    if err != nil {
+        return StatusError{500, err}
+    }
+
+    if puzzle == nil {
+        return StatusError{404, nil}
+    }
+
+    words, err := env.app.GetWords(puzzle.ID)
+    if err != nil {
+        return StatusError{500, err}
+    }
+
+    solvedPuzzle := env.app.SolvePuzzle(puzzle, words)
+
+    err = renderTemplate(w, "view_puzzle", map[string]interface{}{
         "solvedPuzzle": solvedPuzzle,
         "words": words,
     })

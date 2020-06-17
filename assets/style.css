@@ -10,6 +10,7 @@ html {
 body {
     font-size: 1.6rem;
     font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    color: #282828;
     margin: 0;
     padding: 0 8px;
 }
@@ -101,13 +102,38 @@ section#content {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 0 -8px;
 }
 
 section#content > * {
     margin: 0 8px;
 }
 
+section#content > :first-child {
+    margin-left: 0;
+}
+
+section#content > :last-child {
+    margin-right: 0;
+}
+
+section#content-no-edit {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+}
+
+section#content-no-edit > * {
+    margin: 0 10px;
+}
+
+section#content-no-edit > :first-child {
+    margin-left: 0;
+}
+
+section#content-no-edit > :last-child {
+    margin-right: 0;
+}
 
 aside#words {
     max-width: 300px;
@@ -149,6 +175,45 @@ aside#words form input {
 
 aside#words form input.not-found {
     border: 1px solid #ff4949;
+}
+
+aside#words-no-edit {
+    flex: 1;
+    text-align: center;
+}
+
+aside#words-no-edit nav h3 {
+    font-size: 2.2rem;
+    text-align: left;
+    margin: 0;
+}
+
+aside#words-no-edit ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    margin: 2px -3px;
+    padding: 0;
+}
+
+aside#words-no-edit ul li {
+    flex: 1;
+    background: #fbfbfb;
+    border: 1px solid #c5c5c5;
+    margin: 3px 3px;
+    padding: 6px 20px;
+}
+
+aside#words-no-edit ul li.not-found {
+    background: #ffebeb;
+    border: 1px solid #ff9d9d;
+}
+
+aside#words-no-edit ul li.found:hover {
+    background: #ffffeb;
 }
 
 article#puzzle-container {

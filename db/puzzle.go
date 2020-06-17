@@ -10,7 +10,25 @@ import (
 func (db *Database) GetPuzzle(url string) (*models.Puzzle, error) {
     puzzle := &models.Puzzle{}
 
-    sqlStr := "SELECT id, width, height, data FROM puzzles WHERE url = ?"
+    sqlStr := "SELECT id, view_url, width, height, data FROM puzzles WHERE url = ?"
+
+    row := db.db.QueryRow(sqlStr, url)
+    err := row.Scan(&puzzle.ID, &puzzle.ViewURL, &puzzle.Width, &puzzle.Height, &puzzle.Data)
+    if err != nil {
+        if err == sql.ErrNoRows {
+            return nil, nil
+        } else {
+            return nil, DBError{sqlStr, err}
+        }
+    }
+
+    return puzzle, nil
+}
+
+func (db *Database) GetPuzzleByViewUrl(url string) (*models.Puzzle, error) {
+    puzzle := &models.Puzzle{}
+
+    sqlStr := "SELECT id, width, height, data FROM puzzles WHERE view_url = ?"
 
     row := db.db.QueryRow(sqlStr, url)
     err := row.Scan(&puzzle.ID, &puzzle.Width, &puzzle.Height, &puzzle.Data)
@@ -26,7 +44,7 @@ func (db *Database) GetPuzzle(url string) (*models.Puzzle, error) {
 }
 
 func (db *Database) CreatePuzzle(puzzle *models.Puzzle) error {
-    _, err := db.db.Exec(`INSERT INTO puzzles (url, width, height, data, type, datetime) VALUES (?, ?, ?, ?, ?, ?)`, puzzle.URL, puzzle.Width, puzzle.Height, puzzle.Data, 0, time.Now())
+    _, err := db.db.Exec(`INSERT INTO puzzles (url, view_url, width, height, data, type, datetime) VALUES (?, ?, ?, ?, ?, ?, ?)`, puzzle.URL, puzzle.ViewURL, puzzle.Width, puzzle.Height, puzzle.Data, 0, time.Now())
     return err
 }
 

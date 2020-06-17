@@ -34,6 +34,17 @@ func (app *App) GetPuzzle(url string) (*models.Puzzle, error) {
     return puzzle, nil
 }
 
+func (app *App) GetPuzzleByViewUrl(url string) (*models.Puzzle, error) {
+    puzzle, err := app.Database.GetPuzzleByViewUrl(url)
+    if err != nil {
+        return nil, err
+    } else if puzzle == nil {
+        return nil, nil
+    }
+
+    return puzzle, nil
+}
+
 func (app *App) GetFormattedPuzzle(url string) (*models.Puzzle, error) {
     puzzle, err := app.GetPuzzle(url)
     if err != nil {
@@ -59,10 +70,12 @@ func sanitizeBody(body string) string {
 func (app *App) CreatePuzzle(body string, puzzleType int) (string, error) {
     rand.Seed(time.Now().UnixNano())
     url := strconv.Itoa(rand.Intn(max - min) + min)
+    viewUrl := strconv.Itoa(rand.Intn(max - min) + min)
     body = sanitizeBody(body)
 
     puzzle := &models.Puzzle{
         URL: url,
+        ViewURL: viewUrl,
         Data: body,
         Type: puzzleType,
     }

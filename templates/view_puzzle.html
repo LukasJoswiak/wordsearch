@@ -1,0 +1,44 @@
+{{define "title"}}Puzzle | {{end}}
+
+{{define "body"}}
+<!--form action="/puzzle/{{.solvedPuzzle.URL}}/clone" method="POST">
+    <button type="submit">Clone</button>
+</form-->
+
+<section id="content-no-edit">
+    <aside id="words-no-edit">
+        <nav>
+            <h3>Words</h3>
+        </nav>
+        <ul>
+            {{range $i, $word := .words.Words}}
+            {{- $class := "found"}}
+            {{- if not $word.Exists}}
+            {{- $class = "not-found"}}
+            {{- end -}}
+            <li class="{{$class}}">{{$word.Word}}</li>
+            {{end}}
+        </ul>
+    </aside>
+
+    <article id="puzzle-container">
+        {{with .solvedPuzzle}}
+
+        <article id="puzzle">
+        {{- range $y, $arr := .Locations}}
+            <div class="row">
+            {{- range $x, $location := $arr}}
+                {{- $class := ""}}
+                {{- if gt (len $location.Words) 0}}
+                {{- $class = " highlight"}}
+                {{- end -}}
+                <span class="letter {{- $class}}">{{$location.Char}}</span>
+            {{- end -}}
+            </div>
+        {{- end}}
+        </article>
+        {{end}}
+    </article>
+</section>
+
+{{- end}}
