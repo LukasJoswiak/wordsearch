@@ -130,9 +130,10 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
     // Build up a map of each character to the locations it appears in the puzzle.
     letterMap := letterMap(puzzleArray)
 
-    for _, word := range words.Words {
+    for index, word := range words.Words {
         startChar := rune(word.Word[0])
         positions := letterMap[startChar]
+        found := false
 
         // Start search from each location first character in word shows up.
         for _, coordinate := range positions {
@@ -164,6 +165,7 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
                 if j == len(word.Word) {
                     // Found word. Add word to each coordinate it appears at in
                     // solved puzzle.
+                    found = true
                     x = xOrig
                     y = yOrig
                     for j = 0; j < len(word.Word); j++ {
@@ -174,6 +176,10 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
                     }
                 }
             }
+        }
+
+        if found {
+            words.Words[index].Exists = true
         }
     }
 

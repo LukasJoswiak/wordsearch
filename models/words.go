@@ -8,6 +8,7 @@ type Words struct {
 type Word struct {
     ID      int
     Word    string
+    Exists  bool
 }
 
 // Form input.
