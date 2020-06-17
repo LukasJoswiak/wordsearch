@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <header>
-        <h1>Word Search Solver</h1>
-    </header>
-    <main>
-        {{template "body" .}}
-    </main>
-    <footer>Footer</footer>
+    <div class="container">
+        <header id="header">
+            <h1>Word Search Solver</h1>
+        </header>
+        <main>
+            {{template "body" .}}
+        </main>
+        <footer>Footer</footer>
+    </div>
 </body>
 </html>
 {{- end}}

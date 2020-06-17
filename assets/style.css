@@ -10,9 +10,18 @@ html {
 body {
     font-size: 1.6rem;
     font-family: 'Helvetica Neue', 'Arial', sans-serif;
-    max-width: 1100px;
-    margin: 0 auto;
     padding: 0 8px;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 0.5rem;
+    justify-content: center;
+}
+
+#header {
+    text-align: center;
 }
 
 textarea {
@@ -31,7 +40,7 @@ section#content .column {
 }
 
 aside#words {
-    max-width: 400px;
+    max-width: 300px;
     flex: 1 1 200px;
 }
 
