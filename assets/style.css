@@ -10,6 +10,7 @@ html {
 body {
     font-size: 1.6rem;
     font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    margin: 0;
     padding: 0 8px;
 }
 
@@ -18,6 +19,10 @@ body {
     grid-template-rows: repeat(3, auto);
     grid-gap: 0.5rem;
     justify-content: center;
+}
+
+.container > * {
+    min-width: 0;
 }
 
 #header {
@@ -35,13 +40,10 @@ section#content {
     justify-content: center;
 }
 
-section#content .column {
-    margin: 0 8px;
-}
-
 aside#words {
     max-width: 300px;
     flex: 1 1 200px;
+    padding: 0 8px;
 }
 
 aside#words h2 {
@@ -57,6 +59,7 @@ aside#words form input {
 
 article#puzzle-container {
     flex: 0 1 content;
+    overflow: scroll;
 }
 
 article#puzzle {

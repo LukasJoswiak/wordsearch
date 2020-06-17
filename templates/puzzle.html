@@ -6,7 +6,7 @@
 </form>
 
 <section id="content">
-    <aside id="words" class="column">
+    <aside id="words">
         <h2>Words</h2>
         <form action="/puzzle/{{.solvedPuzzle.URL}}/words" method="POST">
             {{range $i, $word := .words.Words}}
@@ -19,9 +19,8 @@
         </form>
     </aside>
 
-    <article id="puzzle-container" class="column">
+    <article id="puzzle-container">
         {{with .solvedPuzzle}}
-        <a href="/p/{{.URL}}/edit">Edit</a>
 
         <article id="puzzle">
         {{- range $y, $arr := .Locations}}
