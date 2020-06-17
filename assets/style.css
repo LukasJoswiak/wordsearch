@@ -29,6 +29,15 @@ body {
     text-align: center;
 }
 
+#header a {
+    color: inherit;
+    text-decoration: none;
+}
+
+#header a:hover {
+    text-decoration: underline;
+}
+
 textarea {
     text-transform: uppercase;
 }
@@ -38,16 +47,42 @@ section#content {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 0 -8px;
 }
+
+section#content > * {
+    margin: 0 8px;
+}
+
 
 aside#words {
     max-width: 300px;
     flex: 1 1 200px;
-    padding: 0 8px;
 }
 
-aside#words h2 {
+aside#words nav {
+    display: flex;
+    align-items: flex-end;
+}
+
+aside#words nav > * {
+    flex: 1;
+}
+
+aside#words nav h3 {
+    font-size: 2.2rem;
     margin: 0;
+}
+
+aside#words nav a {
+    color: #0086b3;
+    text-align: right;
+    margin-bottom: 2px;
+    margin-right: 1px;
+}
+
+aside#words nav a:hover {
+    color: #00b2ee;
 }
 
 aside#words form input {
@@ -79,4 +114,19 @@ article#puzzle .row .letter {
 
 article#puzzle .row .highlight {
     background: yellow;
+}
+
+#footer {
+    font-weight: 300;
+    color: #bababa;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#footer a {
+    color: inherit;
+}
+
+#footer a:hover {
+    color: #9d9d9d;
 }

@@ -1,13 +1,16 @@
 {{define "title"}}Puzzle | {{end}}
 
 {{define "body"}}
-<form action="/puzzle/{{.solvedPuzzle.URL}}/clone" method="POST">
+<!--form action="/puzzle/{{.solvedPuzzle.URL}}/clone" method="POST">
     <button type="submit">Clone</button>
-</form>
+</form-->
 
 <section id="content">
     <aside id="words">
-        <h2>Words</h2>
+        <nav>
+            <h3>Words</h3>
+            <a href="/p/{{.solvedPuzzle.URL}}/edit">Edit Puzzle</a>
+        </nav>
         <form action="/puzzle/{{.solvedPuzzle.URL}}/words" method="POST">
             {{range $i, $word := .words.Words}}
             <input type="hidden" name="Words.{{$i}}.ExistingWord" value="{{$word.Word}}">
