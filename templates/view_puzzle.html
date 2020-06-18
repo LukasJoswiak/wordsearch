@@ -16,7 +16,7 @@
             {{- if not $word.Exists}}
             {{- $class = "not-found"}}
             {{- end -}}
-            <li class="{{$class}}">{{$word.Word}}</li>
+            <li class="{{$class}}" value="{{$word.Word}}">{{$word.Word}}</li>
             {{end}}
         </ul>
     </aside>
@@ -32,7 +32,7 @@
                 {{- if gt (len $location.Words) 0}}
                 {{- $class = " highlight"}}
                 {{- end -}}
-                <span class="letter {{- $class}}">{{$location.Char}}</span>
+                <span class="letter {{- $class}}" encapsulated-words="{{$location.Class}}">{{$location.Char}}</span>
             {{- end -}}
             </div>
         {{- end}}

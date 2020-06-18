@@ -13,7 +13,7 @@
         </nav>
         <form action="/puzzle/{{.solvedPuzzle.URL}}/words" method="POST">
             {{range $i, $word := .words.Words}}
-            {{- $class := ""}}
+            {{- $class := "found"}}
             {{- if not $word.Exists}}
             {{- $class = "not-found"}}
             {{- end -}}
@@ -23,7 +23,7 @@
             <input type="hidden" name="Words.{{len .words.Words}}.ExistingWord">
             <input type="text" name="Words.{{len .words.Words}}.Word" autofocus>
             <div class="button-container">
-                <input type="button" class="secondary" value="Add word">
+                <input type="button" id="add-word" class="secondary" value="Add word">
                 <input type="submit" value="Save">
             </div>
         </form>
@@ -45,7 +45,7 @@
                 {{- if gt (len $location.Words) 0}}
                 {{- $class = " highlight"}}
                 {{- end -}}
-                <span class="letter {{- $class}}">{{$location.Char}}</span>
+                <span class="letter {{- $class}}" encapsulated-words="{{$location.Class}}">{{$location.Char}}</span>
             {{- end -}}
             </div>
         {{- end}}

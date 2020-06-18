@@ -22,6 +22,7 @@ type Location struct {
     Char string
     Coordinate Coordinate
     Words []Word
+    Class string
 }
 
 type Coordinate struct {

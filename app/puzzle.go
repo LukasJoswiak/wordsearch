@@ -138,6 +138,7 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
                     Y: i,
                 },
                 Words: []models.Word{},
+                Class: "",
             }
         }
     }
@@ -185,6 +186,7 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
                     y = yOrig
                     for j = 0; j < len(word.Word); j++ {
                         solvedPuzzle.Locations[y][x].Words = append(solvedPuzzle.Locations[y][x].Words, word)
+                        solvedPuzzle.Locations[y][x].Class += word.Word + " "
 
                         x = x + xDir[i]
                         y = y + yDir[i]

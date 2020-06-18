@@ -26,6 +26,10 @@ body {
     min-width: 0;
 }
 
+#header h1 {
+    margin: 20px 0 12px 0;
+}
+
 #header a {
     color: inherit;
     text-decoration: none;
@@ -169,6 +173,10 @@ aside#words form input.not-found {
     border: 1px solid #ff4949;
 }
 
+aside#words form input.found:hover {
+    border: 1px solid #a2d800;
+}
+
 aside#words #share {
     margin: 16px 0;
 }
@@ -241,7 +249,7 @@ aside#words-no-edit ul li.not-found {
 }
 
 aside#words-no-edit ul li.found:hover {
-    background: #ffffeb;
+    background: #f5ffd8;
 }
 
 article#puzzle-container {
@@ -254,6 +262,7 @@ article#puzzle {
     font-family: monospace;
     font-size: 3rem;
     text-transform: uppercase;
+    margin-top: -4px;
 }
 
 article#puzzle .row {
@@ -266,7 +275,11 @@ article#puzzle .row .letter {
 }
 
 article#puzzle .row .highlight {
-    background: yellow;
+    background: #ffff62;
+}
+
+article#puzzle .row .selected {
+    background: #bfff00;
 }
 
 #footer {
