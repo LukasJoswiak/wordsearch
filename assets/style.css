@@ -173,8 +173,12 @@ aside#words form input.not-found {
     border: 1px solid #ff4949;
 }
 
-aside#words form input.found:hover {
+aside#words form input.found:hover:not(:focus) {
     border: 1px solid #a2d800;
+}
+
+aside#words form input.hidden {
+    display: none;
 }
 
 aside#words #share {
