@@ -33,15 +33,16 @@ if (wordForm != null) {
 
     // Delete input when backspace is pressed and the input is empty.
     var wordInputs = document.querySelectorAll("#inner-words > input[type='text']");
-    console.log(wordInputs);
     for (var i = 0; i <  wordInputs.length; i++) {
-        wordInputs[i].onkeydown = function(e) {
-            var key = e.keyCode || e.which;
-            if (key == 8 && this.value.length == 0) {
-                var removeInputs = document.querySelectorAll("input[name='" + this.name + "']");
-                for (var j = 0; j < removeInputs.length; j++) {
-                    removeInputs[j].classList.add("hidden");
-                }
+        wordInputs[i].onkeydown = wordKeypress;
+    }
+
+    function wordKeypress(e) {
+        var key = e.keyCode || e.which;
+        if (key == 8 && this.value.length == 0) {
+            var removeInputs = document.querySelectorAll("input[name='" + this.name + "']");
+            for (var j = 0; j < removeInputs.length; j++) {
+                removeInputs[j].classList.add("hidden");
             }
         }
     }
@@ -62,6 +63,7 @@ if (wordForm != null) {
         var input = document.createElement("input");
         input.type = "text";
         input.name = hiddenInput.name;
+        input.onkeydown = wordKeypress;
 
         innerWords.append(hiddenInput);
         innerWords.append(input);
