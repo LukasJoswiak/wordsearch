@@ -57,6 +57,7 @@ textarea.puzzle {
 input, textarea {
     border: 1px solid #d8d8d8;
     border-radius: 0;
+    padding: 6px;
 }
 
 
@@ -170,11 +171,25 @@ aside#words form input {
     font-size: 1.8rem;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding: 6px 4px;
 }
 
 aside#words form input.not-found {
     border: 1px solid #ff4949;
+}
+
+aside#words #share {
+    margin: 16px 0;
+}
+
+aside#words #share h4 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+
+aside#words #share input {
+    width: 100%;
+    font-size: 1.7rem;
 }
 
 aside#words-no-edit {

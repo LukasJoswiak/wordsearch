@@ -122,6 +122,7 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
 
     solvedPuzzle := &models.SolvedPuzzle{}
     solvedPuzzle.URL = puzzle.URL
+    solvedPuzzle.ViewURL = puzzle.ViewURL
 
     // Populate each coordinate with the puzzle letter.
     for i := range puzzleArray {

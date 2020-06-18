@@ -13,8 +13,9 @@ type Puzzle struct {
 }
 
 type SolvedPuzzle struct {
-    URL       string
-    Locations [][]Location
+    URL           string
+    ViewURL       string
+    Locations     [][]Location
 }
 
 type Location struct {
