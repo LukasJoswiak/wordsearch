@@ -12,7 +12,6 @@ body {
     font-family: 'Helvetica Neue', 'Arial', sans-serif;
     color: #282828;
     margin: 0;
-    padding: 0 8px;
 }
 
 .container {
@@ -26,6 +25,10 @@ body {
     min-width: 0;
 }
 
+#header {
+    padding: 0 10px;
+}
+
 #header h1 {
     margin: 20px 0 12px 0;
 }
@@ -33,7 +36,6 @@ body {
 #header a {
     color: inherit;
     text-decoration: none;
-    padding: 0 10px;
 }
 
 #header a:hover {
@@ -92,16 +94,21 @@ input, textarea {
     flex: 1;
 }
 
-.button-container input {
+.button-container input, .button-container a {
     font-size: 2rem;
+    font-style: normal;
+    color: inherit;
     background: #f6f6f6;
     border-radius: 0;
+    border: 1px solid #d8d8d8;
+    text-align: center;
+    text-decoration: none;
     margin: 5px 2px;
-    padding: 6px 4px;
+    padding: 6px 30px;
     cursor: pointer;
 }
 
-.button-container input:hover {
+.button-container input:hover, .button-container a:hover {
     background: #f1f1f1;
 }
 
@@ -144,6 +151,28 @@ section#content-no-edit {
 
 section#content-no-edit > * {
     margin: 0  5px;
+}
+
+@media (max-width: 560px) {
+    #header {
+        padding: 0 8px;
+    }
+
+    #footer {
+        padding: 0 8px;
+    }
+
+    section#content {
+        padding: 0;
+    }
+
+    section#content-no-edit {
+        padding: 0 2px;
+    }
+
+    aside#words-no-edit {
+        margin: 0 10px;
+    }
 }
 
 aside#words {

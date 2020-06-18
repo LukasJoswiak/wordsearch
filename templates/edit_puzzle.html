@@ -4,12 +4,10 @@
 <section class="other">
     <h1>Edit Puzzle</h1>
 
-    <a href="/p/{{.puzzle.URL}}">Cancel</a>
-
     <form action="/puzzle/{{.puzzle.URL}}/update" method="POST">
         <textarea name="body" id="puzzle-textarea" spellcheck="false">{{.puzzle.Data}}</textarea>
         <div class="button-container">
-            <input type="button" class="secondary" value="Cancel">
+            <a href="/p/{{.puzzle.URL}}" class="secondary">Cancel</a>
             <input type="submit" value="Submit">
         </div>
     </form>

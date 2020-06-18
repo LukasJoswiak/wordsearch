@@ -91,3 +91,9 @@ for (var i in words) {
         }
     }
 }
+
+// Select share link when clicked (for easy copying).
+var shareInput = document.getElementById("share-link");
+shareInput.onclick = function() {
+    this.setSelectionRange(0, this.value.length);
+}
