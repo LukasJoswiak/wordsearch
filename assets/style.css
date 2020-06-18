@@ -55,16 +55,29 @@ textarea#puzzle-textarea {
     padding: 6px 16px;
 }
 
+@media (max-width: 560px) {
+    #header h1 {
+        font-size: 2.8rem;
+    }
+
+    textarea#puzzle-textarea {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
 *:focus {
     outline: 1px solid #72baff;
 }
 
 input, textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     border: 1px solid #d8d8d8;
     border-radius: 0;
     padding: 6px;
 }
-
 
 .button-container {
     display: flex;

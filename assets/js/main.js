@@ -8,6 +8,9 @@ if (textarea != null) {
 }
 
 function autoResize(textarea) {
+    if (textarea.innerHTML.length == 0) {
+        return;
+    }
     textarea.style.width = "1px";
     textarea.style.height = "1px";
     textarea.style.width = (textarea.scrollWidth + 2) + "px";
