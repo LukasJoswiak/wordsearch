@@ -13,8 +13,10 @@ function autoResize(textarea) {
     }
     textarea.style.width = "1px";
     textarea.style.height = "1px";
-    textarea.style.width = (textarea.scrollWidth + 2) + "px";
-    textarea.style.height = (textarea.scrollHeight + 2) + "px";
+    var width = textarea.scrollWidth;
+    var height = textarea.scrollHeight;
+    textarea.style.width = (width + 2) + "px";
+    textarea.style.height = (height + 2) + "px";
 }
 
 // Override enter to add a new word instead of submit word form.

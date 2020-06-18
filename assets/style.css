@@ -45,12 +45,14 @@ textarea#puzzle-textarea {
     max-width: 100%;
     min-width: 517px;
     min-height: 214px;
-    font-size: 2.6rem;
+    font-family: monospace;
+    font-size: 2.8rem;
     letter-spacing: 20px;
     line-height: 40px;
     text-transform: uppercase;
     overflow-x: auto;
     white-space: pre;
+    word-wrap: normal;
     border-radius: 0;
     padding: 6px 16px;
 }
