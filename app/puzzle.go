@@ -41,6 +41,7 @@ func (app *App) GetPuzzleByViewUrl(url string) (*models.Puzzle, error) {
     } else if puzzle == nil {
         return nil, nil
     }
+    puzzle.ViewURL = url
 
     return puzzle, nil
 }
@@ -103,8 +104,8 @@ func (app *App) UpdatePuzzle(url string, body string) error {
     return nil
 }
 
-func (app *App) ClonePuzzle(url string) (string, error) {
-    puzzle, err := app.GetPuzzle(url)
+func (app *App) ClonePuzzle(viewUrl string) (string, error) {
+    puzzle, err := app.GetPuzzleByViewUrl(viewUrl)
     if err != nil {
         return "", err
     }

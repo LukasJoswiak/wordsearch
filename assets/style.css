@@ -29,6 +29,7 @@ body {
 #header a {
     color: inherit;
     text-decoration: none;
+    padding: 0 10px;
 }
 
 #header a:hover {
@@ -98,23 +99,20 @@ input, textarea {
     font-style: italic;
 }
 
+section.other {
+    padding: 0 10px;
+}
+
 section#content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 0 8px;
 }
 
 section#content > * {
     margin: 0 8px;
-}
-
-section#content > :first-child {
-    margin-left: 0;
-}
-
-section#content > :last-child {
-    margin-right: 0;
 }
 
 section#content-no-edit {
@@ -122,18 +120,11 @@ section#content-no-edit {
     flex-direction: row;
     flex-wrap: wrap-reverse;
     justify-content: center;
+    padding: 0 5px;
 }
 
 section#content-no-edit > * {
-    margin: 0 10px;
-}
-
-section#content-no-edit > :first-child {
-    margin-left: 0;
-}
-
-section#content-no-edit > :last-child {
-    margin-right: 0;
+    margin: 0  5px;
 }
 
 aside#words {
@@ -141,28 +132,29 @@ aside#words {
     flex: 1 1 200px;
 }
 
-aside#words nav {
+aside.words nav {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
 }
 
-aside#words nav > * {
+aside.words nav > * {
     flex: 1;
 }
 
-aside#words nav h3 {
+aside.words nav h3 {
     font-size: 2.2rem;
     margin: 0;
 }
 
-aside#words nav a {
+aside.words nav a {
     color: #0086b3;
     text-align: right;
     margin-bottom: 2px;
     margin-right: 1px;
 }
 
-aside#words nav a:hover {
+aside.words nav a:hover {
     color: #00b2ee;
 }
 
@@ -200,7 +192,28 @@ aside#words-no-edit {
 aside#words-no-edit nav h3 {
     font-size: 2.2rem;
     text-align: left;
+    margin: 0 16px 0 0;
+}
+
+aside#words-no-edit nav form {
+    flex: 0 1 auto;
+    margin-bottom: 1px;
+    margin-right: 1px;
+}
+
+aside#words-no-edit nav form button {
+    font-size: 1.7rem;
+    color: #0086b3;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
     margin: 0;
+    padding: 0;
+}
+
+aside#words-no-edit nav form button:hover {
+    color: #00b2ee;
 }
 
 aside#words-no-edit ul {
@@ -234,6 +247,7 @@ aside#words-no-edit ul li.found:hover {
 article#puzzle-container {
     flex: 0 1 content;
     overflow: scroll;
+    margin-bottom: 8px;
 }
 
 article#puzzle {
@@ -260,6 +274,7 @@ article#puzzle .row .highlight {
     color: #bababa;
     text-align: center;
     margin: 20px 0;
+    padding: 0 10px;
 }
 
 #footer a {

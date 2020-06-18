@@ -1,10 +1,12 @@
 {{define "title"}}Home | {{end}}
 
 {{define "body"}}
-<form action="/puzzle/create" method="POST">
-    <textarea name="body" id="puzzle-textarea" spellcheck="false" placeholder="ABC..."></textarea>
-    <div class="button-container">
-        <input type="submit" value="Submit">
-    </div>
-</form>
+<section class="other">
+    <form action="/puzzle/create" method="POST">
+        <textarea name="body" id="puzzle-textarea" spellcheck="false" placeholder="ABC..."></textarea>
+        <div class="button-container">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</section>
 {{end}}

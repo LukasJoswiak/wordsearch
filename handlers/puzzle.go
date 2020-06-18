@@ -51,9 +51,9 @@ func (env *Environment) updatePuzzleHandler(w http.ResponseWriter, r *http.Reque
 
 func (env *Environment) clonePuzzleHandler(w http.ResponseWriter, r *http.Request) error {
     vars := mux.Vars(r)
-    url := vars["url"]
+    viewUrl := vars["view_url"]
 
-    url, err := env.app.ClonePuzzle(url)
+    url, err := env.app.ClonePuzzle(viewUrl)
     if err != nil {
         return StatusError{500, err}
     }

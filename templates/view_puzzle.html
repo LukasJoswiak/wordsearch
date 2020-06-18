@@ -1,14 +1,14 @@
 {{define "title"}}Puzzle | {{end}}
 
 {{define "body"}}
-<!--form action="/puzzle/{{.solvedPuzzle.URL}}/clone" method="POST">
-    <button type="submit">Clone</button>
-</form-->
-
 <section id="content-no-edit">
-    <aside id="words-no-edit">
+    <aside id="words-no-edit" class="words">
         <nav>
             <h3>Words</h3>
+
+            <form action="/puzzle/{{.solvedPuzzle.ViewURL}}/clone" method="POST">
+                <button type="submit">Make a copy</button>
+            </form>
         </nav>
         <ul>
             {{range $i, $word := .words.Words}}
