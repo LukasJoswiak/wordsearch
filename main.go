@@ -37,12 +37,20 @@ func main() {
     defer logFile.Close()
     loggedRouter := ghandlers.LoggingHandler(logFile, r)
 
+    // Write errors to error log.
+    errorLogFile, err := os.Create(config.ErrorLogFile)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer errorLogFile.Close()
+    log.SetOutput(errorLogFile)
+
     server := &http.Server{
         Handler: ghandlers.CompressHandler(loggedRouter),
         Addr: fmt.Sprintf(":%d", config.Port),
         WriteTimeout: 15 * time.Second,
         ReadTimeout: 15 * time.Second,
     }
-    log.Printf("listening on port %d", 8080)
+    fmt.Printf("listening on port %d\n", 8080)
     log.Fatal(server.ListenAndServe())
 }

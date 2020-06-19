@@ -11,9 +11,10 @@ import (
 )
 
 type Config struct {
-    Database      *db.Config `json:"database"`
-    Port          int        `json:"port"`
-    LogFile       string     `json:"logFile"`
+    Database     *db.Config `json:"database"`
+    Port         int        `json:"port"`
+    LogFile      string     `json:"logFile"`
+    ErrorLogFile string     `json:"errorLogFile"`
 }
 
 func New() (*Config) {

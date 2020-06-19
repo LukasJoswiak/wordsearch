@@ -4,5 +4,6 @@
         "password": "password"
     },
     "port": 8080,
-    "logFile": "log.log"
+    "logFile": "log.log",
+    "errorLogFile": "error.log"
 }
