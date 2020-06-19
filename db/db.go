@@ -26,8 +26,7 @@ type Database struct {
 }
 
 func InitDB(config *Config) (*Database, error) {
-    // TODO: Move database password to configuration
-    db, err := sql.Open("mysql", "root:password@/")
+    db, err := sql.Open("mysql", "root:" + config.Password + "@/")
     if err != nil {
         log.Fatal(err)
     }

@@ -7,6 +7,7 @@ import (
     "os"
     "time"
 
+
     "github.com/gorilla/mux"
     ghandlers "github.com/gorilla/handlers"
     _ "github.com/go-sql-driver/mysql"
@@ -29,8 +30,12 @@ func main() {
     env := handlers.New(app)
     env.Init(r)
 
-    // TODO: log to file
-    loggedRouter := ghandlers.LoggingHandler(os.Stdout, r)
+    logFile, err := os.Create(config.LogFile)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer logFile.Close()
+    loggedRouter := ghandlers.LoggingHandler(logFile, r)
 
     server := &http.Server{
         Handler: ghandlers.CompressHandler(loggedRouter),

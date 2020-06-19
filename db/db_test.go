@@ -75,8 +75,8 @@ func TestCreatePuzzle(t *testing.T) {
 
 func TestGetNonExistentPuzzle(t *testing.T) {
     puzzle, err := testApp.Database.GetPuzzle("1")
-    if err != sql.ErrNoRows {
-        t.Errorf("expected ErrNoRows, got %v", err)
+    if err != nil {
+        t.Errorf("expected nil error, got %v", err)
     }
     if puzzle != nil {
         t.Errorf("expected nil puzzle, got %v", puzzle)
