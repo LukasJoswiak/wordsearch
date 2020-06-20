@@ -3,6 +3,8 @@ package handlers
 import (
     "log"
     "net/http"
+    "path/filepath"
+    "runtime"
 
     "github.com/gorilla/mux"
 
@@ -33,7 +35,10 @@ func New(app *app.App) *Environment {
 }
 
 func (env *Environment) Init(r *mux.Router) {
-    staticFileDirectory := http.Dir("./assets/")
+    var _, b, _, _ = runtime.Caller(0)
+    var basepath = filepath.Dir(b)
+
+    staticFileDirectory := http.Dir(filepath.Join(basepath, "../assets"))
     staticFileHandler := http.StripPrefix("/static/", http.FileServer(staticFileDirectory))
     r.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
 

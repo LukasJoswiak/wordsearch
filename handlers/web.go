@@ -3,16 +3,27 @@ package handlers
 import (
     "html/template"
     "net/http"
+    "path/filepath"
+    "runtime"
 
     "github.com/gorilla/mux"
 )
 
+var _, b, _, _ = runtime.Caller(0)
+var templatePath = filepath.Join(filepath.Dir(b), "../templates")
+var basePath = filepath.Join(templatePath, "base.html")
+
 var templates = map[string]*template.Template{
-    "home": template.Must(template.ParseFiles("templates/home.html", "templates/base.html")),
-    "puzzle": template.Must(template.ParseFiles("templates/puzzle.html", "templates/base.html")),
-    "view_puzzle": template.Must(template.ParseFiles("templates/view_puzzle.html", "templates/base.html")),
-    "edit_puzzle": template.Must(template.ParseFiles("templates/edit_puzzle.html", "templates/base.html")),
-    "error": template.Must(template.ParseFiles("templates/error.html", "templates/base.html")),
+    "home": template.Must(template.ParseFiles(
+        filepath.Join(templatePath, "home.html"), basePath)),
+    "puzzle": template.Must(template.ParseFiles(
+        filepath.Join(templatePath, "puzzle.html"), basePath)),
+    "view_puzzle": template.Must(template.ParseFiles(
+        filepath.Join(templatePath, "view_puzzle.html"), basePath)),
+    "edit_puzzle": template.Must(template.ParseFiles(
+        filepath.Join(templatePath, "edit_puzzle.html"), basePath)),
+    "error": template.Must(template.ParseFiles(
+        filepath.Join(templatePath,  "error.html"), basePath)),
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string, data map[string]interface{}) error {

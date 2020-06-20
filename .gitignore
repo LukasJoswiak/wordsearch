@@ -1,2 +1,6 @@
 # Executables
 wordsearch
+
+# Logs
+access.log
+error.log
