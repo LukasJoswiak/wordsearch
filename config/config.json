@@ -1,7 +1,6 @@
 {
     "database": {
-        "databaseName": "wordsearch",
-        "password": "password"
+        "databaseName": "wordsearch"
     },
     "port": 8080,
     "logFile": "access.log",
