@@ -68,8 +68,7 @@ func (handler Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         switch e := err.(type) {
         case Error:
-            // TODO: Change format of error log to include more info and write to error file defined in config
-            log.Printf("HTTP %d - %s", e.Status(), e)
+            log.Printf("\"%s %s\" %d: %s\n", r.Method, r.URL, e.Status(), e)
             errorHandler(w, r, e.Status())
         default:
             http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)

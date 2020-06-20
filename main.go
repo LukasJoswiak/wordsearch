@@ -51,6 +51,6 @@ func main() {
         WriteTimeout: 15 * time.Second,
         ReadTimeout: 15 * time.Second,
     }
-    fmt.Printf("listening on port %d\n", 8080)
+    fmt.Printf("server listening on port %d\n", config.Port)
     log.Fatal(server.ListenAndServe())
 }
