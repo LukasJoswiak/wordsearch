@@ -40,5 +40,7 @@ jobs:
     - name: Test
       env:
         DB_PASSWORD: root
-      run: go test -v ./...
+      run: |
+        mysql --version
+        go test -v ./...
 
