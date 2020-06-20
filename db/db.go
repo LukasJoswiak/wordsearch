@@ -45,7 +45,7 @@ func InitDB(config *Config) (*Database, error) {
 }
 
 func (db *Database) CreateDatabase(database string) {
-    createDatabase := "CREATE DATABASE IF NOT EXISTS " + database + " CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci"
+    createDatabase := "CREATE DATABASE IF NOT EXISTS " + database + " CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"
 
     _, err := db.db.Exec(createDatabase)
     if err != nil {
