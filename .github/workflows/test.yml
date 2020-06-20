@@ -7,8 +7,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    env:
-      DB_PASSWORD: password
 
     services:
       mysql:
@@ -40,5 +38,7 @@ jobs:
       run: sudo service mysql start
 
     - name: Test
+      env:
+        DB_PASSWORD: root
       run: go test -v ./...
 
