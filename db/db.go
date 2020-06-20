@@ -3,6 +3,7 @@ package db
 import (
     "database/sql"
     "log"
+    "os"
 )
 
 type DBError struct {
@@ -26,7 +27,8 @@ type Database struct {
 }
 
 func InitDB(config *Config) (*Database, error) {
-    db, err := sql.Open("mysql", "root:" + config.Password + "@/")
+    dbPassword := os.Getenv("DB_PASSWORD")
+    db, err := sql.Open("mysql", "root:" + dbPassword + "@/")
     if err != nil {
         log.Fatal(err)
     }
