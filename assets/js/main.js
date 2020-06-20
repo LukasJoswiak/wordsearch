@@ -8,7 +8,7 @@ if (textarea != null) {
 }
 
 function autoResize(textarea) {
-    if (textarea.innerHTML.length == 0) {
+    if (textarea.value.length == 0) {
         return;
     }
     textarea.style.width = "1px";
@@ -94,6 +94,8 @@ for (var i in words) {
 
 // Select share link when clicked (for easy copying).
 var shareInput = document.getElementById("share-link");
-shareInput.onclick = function() {
-    this.setSelectionRange(0, this.value.length);
+if (shareInput != null) {
+    shareInput.onclick = function() {
+        this.setSelectionRange(0, this.value.length);
+    }
 }
