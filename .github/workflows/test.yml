@@ -4,8 +4,8 @@ on: [ push ]
 
 jobs:
 
-  build:
-    name: Build
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +31,5 @@ jobs:
     - name: Test
       env:
         DB_PASSWORD: root
-      run: |
-        mysql --version
-        go test -v ./...
+      run: go test -v ./...
 
