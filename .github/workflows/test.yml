@@ -40,6 +40,9 @@ jobs:
     - name: Build
       run: go build -v .
 
+    - name: Start MySQL
+      run: sudo service mysql start
+
     - name: Test
       run: go test -v ./...
 
