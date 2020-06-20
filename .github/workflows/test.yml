@@ -7,6 +7,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+        DB_PASSWORD: root
     steps:
 
     - name: Set up Go 1.x
