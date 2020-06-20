@@ -8,7 +8,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     env:
-      DB_PASSWORD: root
+      DB_PASSWORD: password
 
     services:
       mysql:
