@@ -11,46 +11,13 @@ import (
 func (db *Database) GetWords(puzzleId int) (*models.Words, error) {
     words := &models.Words{}
 
-    sql := `SELECT word_id
-            FROM puzzle_words
-            WHERE puzzle_id = ?`
+    sql := `SELECT w.word
+            FROM words w
+            INNER JOIN puzzle_words pw
+            ON pw.word_id = w.id
+            WHERE pw.puzzle_id = ?`
 
-    var wordIds []int
     rows, err := db.db.Query(sql, puzzleId)
-    if err != nil {
-        return nil, err
-    }
-    defer rows.Close()
-    for rows.Next() {
-        var wordId int
-        err = rows.Scan(&wordId)
-        if err != nil {
-            return nil, err
-        }
-
-        wordIds = append(wordIds, wordId)
-    }
-
-    if len(wordIds) == 0 {
-        return words, nil
-    }
-
-    sql = `SELECT word
-            FROM words
-            WHERE id IN (%s)`
-
-    values := []interface{}{}
-
-    var parameters []string
-    const parameter = "?"
-
-    for _, wordId := range wordIds {
-        parameters = append(parameters, parameter)
-        values = append(values, wordId)
-    }
-    sql = fmt.Sprintf(sql, strings.Join(parameters, ","))
-
-    rows, err = db.db.Query(sql, values...)
     if err != nil {
         return nil, err
     }
