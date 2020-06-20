@@ -8,7 +8,17 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     env:
-        DB_PASSWORD: root
+      DB_PASSWORD: root
+
+    services:
+      mysql:
+        image: mysql:latest
+        ports:
+          - 3306
+        env:
+          MYSQL_USER: root
+          MYSQL_PASSWORD: password
+
     steps:
 
     - name: Set up Go 1.x
