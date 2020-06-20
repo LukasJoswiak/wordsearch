@@ -21,6 +21,10 @@ jobs:
 
     steps:
 
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v2
+
     - name: Set up Go 1.x
       uses: actions/setup-go@v2
       with:
