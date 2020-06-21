@@ -42,7 +42,7 @@ func (env *Environment) homeHandler(w http.ResponseWriter, r *http.Request) erro
     return nil
 }
 
-func (env *Environment) editWordsHandler(w http.ResponseWriter, r *http.Request) error {
+func (env *Environment) solvePuzzleHandler(w http.ResponseWriter, r *http.Request) error {
     vars := mux.Vars(r)
     url := vars["url"]
 

@@ -43,7 +43,7 @@ func (env *Environment) Init(r *mux.Router) {
     r.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
 
     r.Handle("/", Handler{env.homeHandler}).Methods("GET")
-    r.Handle("/p/{url:[0-9]+}", Handler{env.editWordsHandler}).Methods("GET")
+    r.Handle("/p/{url:[0-9]+}", Handler{env.solvePuzzleHandler}).Methods("GET")
     r.Handle("/p/{url:[0-9]+}/edit", Handler{env.editPuzzleHandler}).Methods("GET")
     r.Handle("/v/{url:[0-9]+}", Handler{env.viewPuzzleHandler})
 

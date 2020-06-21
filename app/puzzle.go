@@ -10,6 +10,7 @@ import (
     "github.com/LukasJoswiak/wordsearch/models"
 )
 
+// Min and max values to use when generating random URLs.
 const (
     min = 1000000
     max = 9999999
@@ -69,6 +70,7 @@ func sanitizeBody(body string) string {
 }
 
 func (app *App) CreatePuzzle(body string, puzzleType int) (string, error) {
+    // TODO: Make sure URL isn't a duplicate
     rand.Seed(time.Now().UnixNano())
     url := strconv.Itoa(rand.Intn(max - min) + min)
     viewUrl := strconv.Itoa(rand.Intn(max - min) + min)

@@ -4,6 +4,7 @@ import (
     "database/sql"
     "log"
     "os"
+    "time"
 )
 
 type DBError struct {
@@ -28,10 +29,17 @@ type Database struct {
 
 func InitDB(config *Config) (*Database, error) {
     dbPassword := os.Getenv("DB_PASSWORD")
+    if len(dbPassword) == 0 {
+        log.Fatal("missing DB_PASSWORD environment variable")
+    }
     db, err := sql.Open("mysql", "root:" + dbPassword + "@/")
     if err != nil {
         log.Fatal(err)
     }
+
+    db.SetMaxOpenConns(25)
+    db.SetMaxIdleConns(25)
+    db.SetConnMaxLifetime(time.Minute * 5)
 
     err = db.Ping()
     if err != nil {
