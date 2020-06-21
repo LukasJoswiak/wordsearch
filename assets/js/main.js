@@ -75,20 +75,44 @@ if (wordForm != null) {
 // Add mouseover detection for each word found in the puzzle.
 const selectedClass = "selected";
 var words = document.querySelectorAll(".found");
-for (var i in words) {
+for (var i = 0; i < words.length; i++) {
     words[i].onmouseover = function() {
         var word = this.getAttribute("value");
-        var els = document.querySelectorAll('[encapsulated-words~="' + word + '"]')
-        for (var i = 0; i < els.length; i++) {
-            els[i].classList.add(selectedClass);
-        }
+        highlightWord(word);
     }
     words[i].onmouseleave = function() {
         var word = this.getAttribute("value");
-        var els = document.querySelectorAll('[encapsulated-words~="' + word + '"]')
-        for (var i = 0; i < els.length; i++) {
-            els[i].classList.remove(selectedClass);
-        }
+        restoreWord(word);
+    }
+}
+
+var highlightedLetters = document.querySelectorAll('.highlight');
+for (var i = 0; i < highlightedLetters.length; i++) {
+    highlightedLetters[i].onmouseover = function() {
+        var words = this.getAttribute("encapsulated-words").trim().split(" ");
+        words.forEach(function(word) {
+            highlightWord(word);
+        });
+    }
+    highlightedLetters[i].onmouseleave = function() {
+        var words = this.getAttribute("encapsulated-words").trim().split(" ");
+        words.forEach(function(word) {
+            restoreWord(word);
+        });
+    }
+}
+
+function highlightWord(word) {
+    var els = document.querySelectorAll('[encapsulated-words~="' + word + '"]')
+    for (var i = 0; i < els.length; i++) {
+        els[i].classList.add(selectedClass);
+    }
+}
+
+function restoreWord(word) {
+    var els = document.querySelectorAll('[encapsulated-words~="' + word + '"]')
+    for (var i = 0; i < els.length; i++) {
+        els[i].classList.remove(selectedClass);
     }
 }
 
