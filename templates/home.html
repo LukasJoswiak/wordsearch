@@ -9,5 +9,10 @@
             <input type="submit" value="Submit">
         </div>
     </form>
+
+    <form action="/puzzle/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="puzzle">
+        <input type="submit" value="Upload">
+    </form>
 </section>
 {{end}}
