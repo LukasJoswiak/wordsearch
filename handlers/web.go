@@ -10,7 +10,8 @@ import (
 )
 
 var _, b, _, _ = runtime.Caller(0)
-var templatePath = filepath.Join(filepath.Dir(b), "../templates")
+var path = filepath.Dir(b)
+var templatePath = filepath.Join(path, "../templates")
 var basePath = filepath.Join(templatePath, "base.html")
 
 var templates = map[string]*template.Template{
@@ -120,6 +121,11 @@ func (env *Environment) editPuzzleHandler(w http.ResponseWriter, r *http.Request
         return StatusError{500, err}
     }
 
+    return nil
+}
+
+func (env *Environment) faviconHandler(w http.ResponseWriter, r *http.Request) error {
+    http.ServeFile(w, r, filepath.Join(path, "../assets/favicon.ico"))
     return nil
 }
 

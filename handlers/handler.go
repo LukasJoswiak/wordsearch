@@ -42,6 +42,8 @@ func (env *Environment) Init(r *mux.Router) {
     staticFileHandler := http.StripPrefix("/static/", http.FileServer(staticFileDirectory))
     r.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
 
+    r.Handle("/favicon.ico", Handler{env.faviconHandler})
+
     r.Handle("/", Handler{env.homeHandler}).Methods("GET")
     r.Handle("/p/{url:[0-9]+}", Handler{env.solvePuzzleHandler}).Methods("GET")
     r.Handle("/p/{url:[0-9]+}/edit", Handler{env.editPuzzleHandler}).Methods("GET")
