@@ -4,3 +4,6 @@ wordsearch
 # Logs
 access.log
 error.log
+
+# Metadata
+.DS_Store

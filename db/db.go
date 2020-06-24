@@ -37,36 +37,34 @@ func InitDB(config *Config) (*Database, error) {
         log.Fatal(err)
     }
 
-    db.SetMaxOpenConns(25)
-    db.SetMaxIdleConns(25)
-    db.SetConnMaxLifetime(time.Minute * 5)
+    CreateDatabase(db, config.DatabaseName)
+    db.Close()
+
+    // Specify database name in DSN to prevent issues with connection pools.
+    db, err = sql.Open("mysql", "root:" + dbPassword + "@/" + config.DatabaseName)
+    if err != nil {
+        log.Fatal(err)
+    }
 
     err = db.Ping()
     if err != nil {
         log.Fatal(err)
     }
 
+    db.SetMaxOpenConns(25)
+    db.SetMaxIdleConns(25)
+    db.SetConnMaxLifetime(time.Minute * 5)
+
     database := &Database{db}
-    database.CreateDatabase(config.DatabaseName)
-    database.UseDatabase(config.DatabaseName)
     database.CreateTables()
 
     return database, nil
 }
 
-func (db *Database) CreateDatabase(database string) {
+func CreateDatabase(db *sql.DB, database string) {
     createDatabase := "CREATE DATABASE IF NOT EXISTS " + database + " CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"
 
-    _, err := db.db.Exec(createDatabase)
-    if err != nil {
-        log.Fatal(err)
-    }
-}
-
-func (db *Database) UseDatabase(database string) {
-    useDatabase := "USE " + database
-
-    _, err := db.db.Exec(useDatabase)
+    _, err := db.Exec(createDatabase)
     if err != nil {
         log.Fatal(err)
     }
