@@ -30,19 +30,25 @@ func main() {
     env := handlers.New(app)
     env.Init(r)
 
-    logFile, err := os.Create(config.LogFile)
+    logFile, err := os.OpenFile(config.LogFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
         log.Fatal(err)
     }
     defer logFile.Close()
+    if _, err = logFile.WriteString("starting server\n"); err != nil {
+        log.Fatal(err)
+    }
     loggedRouter := ghandlers.LoggingHandler(logFile, r)
 
     // Write errors to error log.
-    errorLogFile, err := os.Create(config.ErrorLogFile)
+    errorLogFile, err := os.OpenFile(config.ErrorLogFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
         log.Fatal(err)
     }
     defer errorLogFile.Close()
+    if _, err = errorLogFile.WriteString("starting server\n"); err != nil {
+        log.Fatal(err)
+    }
     log.SetOutput(errorLogFile)
 
     server := &http.Server{
