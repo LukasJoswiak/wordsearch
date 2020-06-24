@@ -85,8 +85,6 @@ func (db *Database) CreateTables() {
             id INT NOT NULL AUTO_INCREMENT,
             url VARCHAR(32) NOT NULL,
             view_url VARCHAR(32) NOT NULL,
-            width SMALLINT NOT NULL,
-            height SMALLINT NOT NULL,
             data TEXT,
             type TINYINT NOT NULL,
             datetime DATETIME NOT NULL,

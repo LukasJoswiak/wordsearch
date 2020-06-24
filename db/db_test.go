@@ -18,8 +18,6 @@ var testApp app.App
 var testPuzzle = &models.Puzzle{
     ID: 1,
     URL: "123",
-    Width: 3,
-    Height: 2,
     Data: "abcdef",
 }
 
@@ -88,8 +86,7 @@ func TestGetPuzzle(t *testing.T) {
         t.Errorf("error fetching puzzle: %v", err)
     }
 
-    if puzzle.ID != testPuzzle.ID || puzzle.Width != testPuzzle.Width ||
-            puzzle.Height != testPuzzle.Height || puzzle.Data != testPuzzle.Data {
+    if puzzle.ID != testPuzzle.ID || puzzle.Data != testPuzzle.Data {
         t.Errorf("expected %v, got %v", testPuzzle, puzzle)
     }
 
