@@ -12,8 +12,8 @@ import (
 
 // Min and max values to use when generating random URLs.
 const (
-    min = 1000000
-    max = 9999999
+    min = 1000000000
+    max = 9999999999
 )
 
 // Regular expression for transforming a puzzle from what the user input into
