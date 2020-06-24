@@ -15,7 +15,8 @@ func (db *Database) GetWords(puzzleId int) (*models.Words, error) {
             FROM words w
             INNER JOIN puzzle_words pw
             ON pw.word_id = w.id
-            WHERE pw.puzzle_id = ?`
+            WHERE pw.puzzle_id = ?
+            ORDER BY w.word ASC`
 
     rows, err := db.db.Query(sql, puzzleId)
     if err != nil {
