@@ -345,3 +345,51 @@ article#puzzle .row .selected {
 #footer a:hover {
     color: #9d9d9d;
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #eeeeee;
+        background: #121212;
+    }
+
+    input, textarea {
+        color: #e0e0e0;
+        background: #2e2e2e;
+        border-color: #bdbdbd;
+    }
+
+    .button-container input, .button-container a {
+        background: #252525;
+    }
+
+    .button-container input:hover, .button-container a:hover {
+        background: #2e2e2e;
+    }
+
+    aside#words form input.not-found {
+        border-color: #e36565;
+    }
+
+    aside#words-no-edit ul li {
+        background: #616161;
+        border-color: #bdbdbd;
+    }
+
+    aside#words-no-edit ul li.not-found {
+        background: #533232;
+        border-color: #632121;
+    }
+
+    aside#words-no-edit ul li.found:hover {
+        background: #788553;
+    }
+
+    article#puzzle .row .highlight {
+        color: #2e2e2e;
+        background: #f3f36e;
+    }
+
+    article#puzzle .row .selected {
+        background: #b5eb14;
+    }
+}

@@ -7,7 +7,7 @@
     <form action="/puzzle/{{.puzzle.URL}}/update" method="POST">
         <textarea name="body" id="puzzle-textarea" spellcheck="false">{{.puzzle.Data}}</textarea>
         <div class="button-container">
-            <a href="/p/{{.puzzle.URL}}" class="secondary">Cancel</a>
+            <a href="/p/{{.puzzle.URL}}" class="secondary" tabindex="0">Cancel</a>
             <input type="submit" value="Submit">
         </div>
     </form>
