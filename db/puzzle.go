@@ -44,7 +44,7 @@ func (db *Database) GetPuzzleByViewUrl(url string) (*models.Puzzle, error) {
 }
 
 func (db *Database) CreatePuzzle(puzzle *models.Puzzle) error {
-    _, err := db.db.Exec(`INSERT INTO puzzles (url, view_url, data, type, datetime) VALUES (?, ?, ?, ?, ?)`, puzzle.URL, puzzle.ViewURL, puzzle.Data, 0, time.Now())
+    _, err := db.db.Exec(`INSERT INTO puzzles (url, view_url, data, type, datetime) VALUES (?, ?, ?, ?, ?)`, puzzle.URL, puzzle.ViewURL, puzzle.Data, puzzle.Type, time.Now())
     return err
 }
 
