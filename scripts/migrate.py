@@ -44,7 +44,11 @@ def format_data(data):
 # Inserts a puzzle with the given data into the database, given a puzzle with
 # the passed in URL does not already exist. Returns true on success.
 def insert_puzzle(cursor, url, view_url, data, puzzle_type, datetime):
-    data = format_data(json.loads(data))
+    try:
+        data = json.loads(data)
+    except:
+        return False
+    data = format_data(data)
 
     select_puzzle = ("SELECT url "
                      "FROM puzzles "
@@ -112,7 +116,10 @@ if __name__ == '__main__':
                     continue
 
                 if len(words) > 0:
-                    words = json.loads(words)
+                    try:
+                        words = json.loads(words)
+                    except:
+                        continue
                     words = [word.lower().strip() for word in words]
                     # Remove duplicate words.
                     words = list(dict.fromkeys(words))
