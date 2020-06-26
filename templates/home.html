@@ -2,8 +2,8 @@
 
 {{define "body"}}
 <section class="other">
-    <p>Enter a word search in the box below.</p>
-    <form action="/puzzle/create" method="POST">
+    <form action="/puzzle/create" method="POST" id="puzzle-form">
+        <p>To solve the word search, enter it in the box below and press submit. Then, you will be able to enter a list of words to find in the puzzle.</p>
         <textarea name="body" id="puzzle-textarea" spellcheck="false" placeholder="ABC..."></textarea>
         <div class="button-container">
             <input type="submit" value="Submit">

@@ -42,10 +42,16 @@ body {
     text-decoration: underline;
 }
 
+form#puzzle-form {
+    max-width: 100%;
+    width: 700px;
+}
+
 textarea#puzzle-textarea {
     display: block;
+    width: 100%;
+    min-width: 700px;
     max-width: 100%;
-    min-width: 517px;
     min-height: 214px;
     font-family: monospace;
     font-size: 2.8rem;
@@ -59,14 +65,17 @@ textarea#puzzle-textarea {
     padding: 6px 16px;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 730px) {
     #header h1 {
         font-size: 2.8rem;
     }
 
+    form#puzzle-form {
+        width: 100% !important;
+    }
+
     textarea#puzzle-textarea {
         min-width: auto;
-        width: 100%;
     }
 }
 

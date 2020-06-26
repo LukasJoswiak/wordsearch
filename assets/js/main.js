@@ -1,21 +1,22 @@
 // Auto-resize textarea based on content.
+var form = document.getElementById('puzzle-form');
 var textarea = document.querySelector('textarea');
-if (textarea != null) {
-    window.onload = autoResize(textarea);
+if (form != null && textarea != null) {
+    window.onload = autoResize(form, textarea);
     textarea.oninput = function() {
-        autoResize(this);
+        autoResize(form, this);
     }
 }
 
-function autoResize(textarea) {
+function autoResize(form, textarea) {
     if (textarea.value.length == 0) {
         return;
     }
-    textarea.style.width = "1px";
+    form.style.width = "1px";
     textarea.style.height = "1px";
     var width = textarea.scrollWidth;
     var height = textarea.scrollHeight;
-    textarea.style.width = (width + 2) + "px";
+    form.style.width = (width + 2) + "px";
     textarea.style.height = (height + 2) + "px";
 }
 
