@@ -135,14 +135,16 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
 
         for j := range puzzleArray[i] {
             solvedPuzzle.Locations[i] = append(solvedPuzzle.Locations[i], models.Location{})
-            solvedPuzzle.Locations[i][j] = models.Location{
-                Char: string(puzzleArray[i][j]),
-                Coordinate: models.Coordinate{
-                    X: j,
-                    Y: i,
-                },
-                Words: []models.Word{},
-                Class: "",
+            if j < len(solvedPuzzle.Locations[i]) {
+                solvedPuzzle.Locations[i][j] = models.Location{
+                    Char: string(puzzleArray[i][j]),
+                    Coordinate: models.Coordinate{
+                        X: j,
+                        Y: i,
+                    },
+                    Words: []models.Word{},
+                    Class: "",
+                }
             }
         }
     }
