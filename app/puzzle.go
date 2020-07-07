@@ -51,6 +51,8 @@ func (app *App) GetFormattedPuzzle(url string) (*models.Puzzle, error) {
     puzzle, err := app.GetPuzzle(url)
     if err != nil {
         return nil, err
+    } else if puzzle == nil {
+        return nil, nil
     }
     puzzle.Data = strings.Replace(puzzle.Data, ",", "\n", -1)
 

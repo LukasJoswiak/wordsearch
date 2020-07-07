@@ -81,9 +81,7 @@ func (env *Environment) viewPuzzleHandler(w http.ResponseWriter, r *http.Request
     puzzle, err := env.app.GetPuzzleByViewUrl(url)
     if err != nil {
         return StatusError{500, err}
-    }
-
-    if puzzle == nil {
+    } else if puzzle == nil {
         return StatusError{404, nil}
     }
 
@@ -112,6 +110,8 @@ func (env *Environment) editPuzzleHandler(w http.ResponseWriter, r *http.Request
     puzzle, err := env.app.GetFormattedPuzzle(url)
     if err != nil {
         return StatusError{500, err}
+    } else if puzzle == nil {
+        return StatusError{404, nil}
     }
 
     err = renderTemplate(w, "edit_puzzle", map[string]interface{}{
