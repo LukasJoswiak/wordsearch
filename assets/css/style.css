@@ -311,7 +311,7 @@ aside#words-no-edit ul li.found:hover {
 
 article#puzzle-container {
     flex: 0 1 content;
-    overflow: scroll;
+    overflow: auto;
     margin-bottom: 8px;
 }
 
@@ -356,6 +356,10 @@ article#puzzle .row .selected {
 }
 
 @media (prefers-color-scheme: dark) {
+    html {
+        scrollbar-color: #6c6c6c #2e2e2e;
+    }
+
     body {
         color: #eeeeee;
         background: #121212;
