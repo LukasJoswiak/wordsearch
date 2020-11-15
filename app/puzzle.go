@@ -6,8 +6,12 @@ import (
     "strconv"
     "strings"
     "time"
+    "unicode"
+    "unicode/utf8"
 
     "github.com/LukasJoswiak/wordsearch/models"
+    "golang.org/x/text/transform"
+    "golang.org/x/text/unicode/norm"
 )
 
 // Min and max values to use when generating random URLs.
@@ -22,6 +26,13 @@ var re = regexp.MustCompile(`([ ]*\r?\n)|([ ]*$)`)
 
 var xDir = [...]int{0, 1, 1, 1, 0, -1, -1, -1}
 var yDir = [...]int{-1, -1, 0, 1, 1, 1, 0, -1}
+
+// Used for normalizing Unicode characters.
+var t = transform.Chain(norm.NFD, transform.RemoveFunc(isMn), norm.NFC)
+
+func isMn(r rune) bool {
+    return unicode.Is(unicode.Mn, r)
+}
 
 func (app *App) GetPuzzle(url string) (*models.Puzzle, error) {
     puzzle, err := app.Database.GetPuzzle(url)
@@ -133,18 +144,24 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
     for i := range puzzleArray {
         solvedPuzzle.Locations = append(solvedPuzzle.Locations, []models.Location{})
 
-        for j := range puzzleArray[i] {
+        // Unicode characters can take up several bytes, causing the index in
+        // the range statement to "skip". The solution is to keep track of the
+        // index separately.
+        index := 0
+        for _, c := range puzzleArray[i] {
             solvedPuzzle.Locations[i] = append(solvedPuzzle.Locations[i], models.Location{})
-            if j < len(solvedPuzzle.Locations[i]) {
-                solvedPuzzle.Locations[i][j] = models.Location{
-                    Char: string(puzzleArray[i][j]),
+
+            if index < len(solvedPuzzle.Locations[i]) {
+                solvedPuzzle.Locations[i][index] = models.Location{
+                    Char: string(c),
                     Coordinate: models.Coordinate{
-                        X: j,
+                        X: index,
                         Y: i,
                     },
                     Words: []models.Word{},
                     Class: "",
                 }
+                index += 1
             }
         }
     }
@@ -153,8 +170,10 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
     letterMap := letterMap(puzzleArray)
 
     for index, word := range words.Words {
-        startChar := rune(word.Word[0])
-        positions := letterMap[startChar]
+        // Normalize first character.
+        startChar, _, _ := transform.String(t, string([]rune(word.Word)[0]))
+        startRune := rune(startChar[0])
+        positions := letterMap[startRune]
         found := false
 
         // Start search from each location first character in word shows up.
@@ -170,13 +189,15 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
                 var j int
 
                 // Search in the selected direction for the length of the word.
-                for j = 1; j < len(word.Word); j++ {
-                    if x < 0 || y < 0 || y >= len(puzzleArray) || x >= len(puzzleArray[y]) {
+                for j = 1; j < utf8.RuneCountInString(word.Word); j++ {
+                    if x < 0 || y < 0 || y >= len(puzzleArray) || x >= utf8.RuneCountInString(puzzleArray[y]) {
                         break
                     }
 
-                    char := puzzleArray[y][x]
-                    if char != word.Word[j] {
+                    // Normalize Unicode characters.
+                    char, _, _ := transform.String(t, string([]rune(puzzleArray[y])[x]))
+                    wordChar, _, _ := transform.String(t, string([]rune(word.Word)[j]))
+                    if char != wordChar {
                         break
                     }
 
@@ -184,13 +205,13 @@ func (app *App) SolvePuzzle(puzzle *models.Puzzle, words *models.Words) *models.
                     y = y + yDir[i]
                 }
 
-                if j == len(word.Word) {
+                if j == utf8.RuneCountInString(word.Word) {
                     // Found word. Add word to each coordinate it appears at in
                     // solved puzzle.
                     found = true
                     x = xOrig
                     y = yOrig
-                    for j = 0; j < len(word.Word); j++ {
+                    for j = 0; j < utf8.RuneCountInString(word.Word); j++ {
                         solvedPuzzle.Locations[y][x].Words = append(solvedPuzzle.Locations[y][x].Words, word)
                         solvedPuzzle.Locations[y][x].Class += word.Word + " "
 
@@ -216,6 +237,7 @@ func letterMap(puzzle []string) map[rune][]models.Coordinate {
     m := make(map[rune][]models.Coordinate)
 
     for y, row := range puzzle {
+        row, _, _ := transform.String(t, row)
         for x, char := range row {
             if m[char] == nil {
                 m[char] = []models.Coordinate{}
