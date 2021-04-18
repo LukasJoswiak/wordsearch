@@ -123,4 +123,19 @@ if (shareInput != null) {
     shareInput.onclick = function() {
         this.setSelectionRange(0, this.value.length);
     }
+
+    // Copy share link when "copy" button is clicked.
+    var copyInput = document.getElementById("copy");
+    var copyText = copyInput.value;
+    var timeout;
+    copyInput.addEventListener('click', function(event) {
+        shareInput.select();
+        document.execCommand('copy');
+
+        copyInput.value = 'Copied!';
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            copyInput.value = copyText;
+        }, 1500);
+    });
 }

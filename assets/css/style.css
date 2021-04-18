@@ -238,15 +238,36 @@ aside#words #share {
     margin: 16px 0;
 }
 
-aside#words #share h4 {
-    font-size: 1.9rem;
-    font-weight: 600;
-    margin: 0 0 4px 0;
+aside#words #share aside {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
 }
 
-aside#words #share input {
+aside#words #share aside h4 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+aside#words #share aside input#copy {
+    font-size: 11px;
+    color: #454545;
+    background: #f9f9f9;
+    border-radius: 4px;
+    margin: 0;
+    padding: 3px 6px;
+    cursor: pointer;
+}
+
+aside#words #share aside input#copy:hover {
+    filter: brightness(0.96);
+}
+
+aside#words #share input#share-link {
     width: 100%;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
 }
 
 aside#words-no-edit {
@@ -404,5 +425,11 @@ article#puzzle .row .selected {
 
     article#puzzle .row .selected {
         background: #b5eb14;
+    }
+
+    aside#words #share aside input#copy {
+        color: #cecece;
+        border-color: #939393;
+        background: inherit;
     }
 }
