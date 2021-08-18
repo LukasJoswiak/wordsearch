@@ -28,11 +28,15 @@ type Database struct {
 }
 
 func InitDB(config *Config) (*Database, error) {
+    dbUser := os.Getenv("DB_USER")
+    if len(dbUser) == 0 {
+        log.Fatal("missing DB_USER environment variable")
+    }
     dbPassword := os.Getenv("DB_PASSWORD")
     if len(dbPassword) == 0 {
         log.Fatal("missing DB_PASSWORD environment variable")
     }
-    db, err := sql.Open("mysql", "root:" + dbPassword + "@/")
+    db, err := sql.Open("mysql", dbUser + ":" + dbPassword + "@/")
     if err != nil {
         log.Fatal(err)
     }
@@ -41,7 +45,7 @@ func InitDB(config *Config) (*Database, error) {
     db.Close()
 
     // Specify database name in DSN to prevent issues with connection pools.
-    db, err = sql.Open("mysql", "root:" + dbPassword + "@/" + config.DatabaseName)
+    db, err = sql.Open("mysql", dbUser + ":" + dbPassword + "@/" + config.DatabaseName)
     if err != nil {
         log.Fatal(err)
     }
