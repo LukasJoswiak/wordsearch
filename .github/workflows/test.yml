@@ -30,6 +30,7 @@ jobs:
 
     - name: Test
       env:
+        DB_USER: root
         DB_PASSWORD: root
       run: go test -v ./...
 
