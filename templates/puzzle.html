@@ -7,36 +7,38 @@
 
 <section id="content">
     <aside id="words" class="words">
-        <nav>
-            <h3>Words</h3>
-            <a href="/p/{{.solvedPuzzle.URL}}/edit">Edit Puzzle</a>
-        </nav>
-        <form action="/puzzle/{{.solvedPuzzle.URL}}/words" method="POST" id="word-form">
-            <div id="inner-words">
-                {{range $i, $word := .words.Words}}
-                {{- $class := "found"}}
-                {{- if not $word.Exists}}
-                {{- $class = "not-found"}}
-                {{- end -}}
-                <input type="hidden" name="Words.{{$i}}.ExistingWord" value="{{$word.Word}}">
-                <input type="text" name="Words.{{$i}}.Word" class="{{$class}}" value="{{$word.Word}}">
-                {{end}}
-                <input type="hidden" name="Words.{{len .words.Words}}.ExistingWord">
-                <input type="text" name="Words.{{len .words.Words}}.Word" autofocus>
-            </div>
-            <div class="button-container">
-                <input type="button" id="add-word" class="secondary no-js-hidden" value="Add word">
-                <input type="submit" value="Save">
-            </div>
-        </form>
+        <div id="words-div">
+            <nav>
+                <h3>Words</h3>
+                <a href="/p/{{.solvedPuzzle.URL}}/edit">Edit Puzzle</a>
+            </nav>
+            <form action="/puzzle/{{.solvedPuzzle.URL}}/words" method="POST" id="word-form">
+                <div id="inner-words">
+                    {{range $i, $word := .words.Words}}
+                    {{- $class := "found"}}
+                    {{- if not $word.Exists}}
+                    {{- $class = "not-found"}}
+                    {{- end -}}
+                    <input type="hidden" name="Words.{{$i}}.ExistingWord" value="{{$word.Word}}">
+                    <input type="text" name="Words.{{$i}}.Word" class="{{$class}}" value="{{$word.Word}}">
+                    {{end}}
+                    <input type="hidden" name="Words.{{len .words.Words}}.ExistingWord">
+                    <input type="text" name="Words.{{len .words.Words}}.Word" autofocus>
+                </div>
+                <div class="button-container">
+                    <input type="button" id="add-word" class="secondary no-js-hidden" value="Add word">
+                    <input type="submit" value="Save">
+                </div>
+            </form>
 
-        <section id="share">
-            <aside>
-                <h4>Share</h4>
-                <input type="button" id="copy" value="Copy">
-            </aside>
-            <input type="text" id="share-link" readonly="readonly" value="https://wordsearch.lukasjoswiak.com/v/{{.solvedPuzzle.ViewURL}}">
-        </section>
+            <section id="share">
+                <aside>
+                    <h4>Share</h4>
+                    <input type="button" id="copy" value="Copy">
+                </aside>
+                <input type="text" id="share-link" readonly="readonly" value="https://wordsearch.lukasjoswiak.com/v/{{.solvedPuzzle.ViewURL}}">
+            </section>
+        </div>
     </aside>
 
     <article id="puzzle-container">

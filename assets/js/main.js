@@ -117,6 +117,58 @@ function restoreWord(word) {
     }
 }
 
+// Sticky positioning + smooth scrolling for word editor.
+// See https://stackoverflow.com/questions/47618271/position-sticky-scrollable-when-longer-than-viewport.
+var words = document.getElementById('words-div');
+var puzzle = document.getElementById('puzzle-container');
+window.onscroll = function(e) {
+    if (words !== null && document.documentElement.clientWidth >= 775 && puzzle.innerHeight > document.documentElement.clientHeight) {
+        if (window.innerHeight < words.offsetHeight) {
+            if (window.scrollY < this.prevScrollY) {
+                this.stickPos = scrollUp();
+            } else {
+                this.stickPos = scrollDown();
+            }
+            this.prevScrollY = window.scrollY;
+        } else {
+            words.setAttribute('style', 'top: 0; bottom: auto; align-self: flex-start;');
+        }
+    }
+}
+
+function scrollUp() {
+    if(this.stickPos === 1) {
+        return this.stickPos;
+    }
+    let aboveAside = words.getBoundingClientRect().top > 0;
+    if (aboveAside){
+        words.setAttribute('style', 'top: 0; bottom: auto; align-self: flex-start;');
+        return 1;
+    }
+    if (this.stickPos === 0) {
+        return this.stickPos;
+    }
+    words.setAttribute('style', 'position: absolute; top: ' + words.offsetTop + 'px; bottom: auto; align-self: auto;');
+    return 0;
+}
+
+function scrollDown() {
+    if (this.stickPos === -1) {
+        return this.stickPos;
+    }
+    let asideBottom = words.getBoundingClientRect().top + words.offsetHeight;
+    let belowAside = window.innerHeight > asideBottom;
+    if (belowAside){
+        words.setAttribute('style', 'position: sticky; top: auto; bottom: 0; align-self: flex-end;');
+        return -1;
+    }
+    if (this.stickPos === 0) {
+        return this.stickPos;
+    }
+    words.setAttribute('style', 'position: absolute; top: ' + words.offsetTop + 'px; bottom: auto; align-self: auto;');
+    return 0;
+}
+
 // Select share link when clicked (for easy copying).
 var shareInput = document.getElementById("share-link");
 if (shareInput != null) {

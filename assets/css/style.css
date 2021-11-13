@@ -162,6 +162,25 @@ section#content-no-edit > * {
     margin: 0  5px;
 }
 
+@media (min-width: 775px) {
+    section#content {
+        flex-wrap: nowrap;
+    }
+
+    aside#words {
+        position: relative;
+        display: flex;
+        flex-shrink: 0 !important;
+        width: 250px;
+    }
+
+    aside#words #words-div {
+        position: sticky;
+        top: 0;
+        align-self: flex-start;
+    }
+}
+
 @media (max-width: 560px) {
     #header {
         padding: 0 8px;
